@@ -26,8 +26,8 @@ Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'categ
 Route::get('/products/{id}', [App\Http\Controllers\HomeController::class, 'product']);
 
 Route::get('/shop', [App\Http\Controllers\HomeController::class, 'shop']);
-
-
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blogs.show');
 // Route::post('/cart/add_to_cart', [App\Http\Controllers\HomeController::class, 'add_to_cart']);
 
 Route::get('/combination_maker', [App\Http\Controllers\HomeController::class, 'combination_maker']);

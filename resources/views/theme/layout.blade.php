@@ -1,3 +1,8 @@
+<?php
+use App\Models\Category;
+$enabledCategories = Category::where('is_enable', 1)->get();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -69,14 +74,21 @@
                             enquiry@MRR HOLIDAYS.my
                         </div>
                     </li>
+                    @foreach($enabledCategories as $category)
                     <li class="nav-item text-nowrap">
+                        <a href="{{ url($category->slug) }}" class="nav-link border-right px-md-4 py-md-0 my-md-2">
+                            {{ $category->title }}
+                        </a>
+                    </li>
+                @endforeach
+                    {{-- <li class="nav-item text-nowrap">
                         <a href="index.html" class="nav-link border-right px-md-4 py-md-0 my-md-2">Car Rental</a>
                     </li>
                     <li class="nav-item">
                         <a href="attractions.html" class="nav-link border-right px-md-4 py-md-0 my-md-2">Attractions</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
-                        <a href="blogs.html" class="nav-link border-right px-md-4 py-md-0 my-md-2">Blog</a>
+                        <a href="{{ route('blog.index') }}" class="nav-link border-right px-md-4 py-md-0 my-md-2">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a href="https://MRR HOLIDAYS.tawk.help/" target="_blank"

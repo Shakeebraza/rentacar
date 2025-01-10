@@ -10,6 +10,7 @@ use App\Models\Attribute;
 use App\Models\Collection;
 use App\Models\ProductCollection;
 use App\Models\Variation;
+use App\Models\Filemanager;
 use App\Models\VariationAttribute;
 use App\Models\Role;
 use Illuminate\Support\Facades\Validator;
@@ -205,10 +206,11 @@ class ProductController extends Controller
          $attributes = Attribute::with('values')->get();
          $collections = Collection::where('is_enable',1)->get();
          $product_details = DB::table('product_details')->where('proid', '=', $id)->get();
-        //  dd($product->collection);
+         //  dd($product->collection);
+         $filemanager = Filemanager::where('is_enable',1)->get();
 
 
-        return view('admin.products.edit',compact('product','categories','brands','attributes','collections','product_details'));
+        return view('admin.products.edit',compact('product','categories','brands','attributes','collections','product_details','filemanager'));
     }
 
     function generateAttributeCombinations($attributes) {
