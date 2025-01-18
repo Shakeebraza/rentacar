@@ -1,6 +1,27 @@
 <?php
 use App\Models\Category;
+use App\Helpers\MenuHelper;
 $enabledCategories = Category::where('is_enable', 1)->get();
+$companyMenuItems = MenuHelper::getMenuItems(1);
+$legalMenuItems = MenuHelper::getMenuItems(2);
+$attractions= MenuHelper::getsubAttractions(45);
+function getset($key) {
+    $jsonData = MenuHelper::getSetting($key);
+    $dataArray = json_decode($jsonData, true);
+
+    if (is_array($dataArray) && !empty($dataArray)) {
+        foreach ($dataArray as $data) {
+            if (isset($data['field']) && $data['field'] === $key) {
+                return $data['value'];
+            }
+        }
+    }
+
+    return null;
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +50,8 @@ $enabledCategories = Category::where('is_enable', 1)->get();
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/js/splide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    
-  
+
+
     <style>
         .label-fleet-deals {
             position: absolute;
@@ -45,7 +66,7 @@ $enabledCategories = Category::where('is_enable', 1)->get();
             background: #bfc9c2;
         }
         </style>
- 
+
 
 @yield('css')
 </head>
@@ -130,10 +151,10 @@ $enabledCategories = Category::where('is_enable', 1)->get();
 
 
 
-         
 
 
-  
+
+
    @yield('content')
 
 
@@ -160,92 +181,63 @@ $enabledCategories = Category::where('is_enable', 1)->get();
                 <div class="col-md-auto mt-md-0">
                     <h6 class="mb-3 text-uppercase">Company</h6>
                     <ul class="list-unstyled">
+                        @foreach ($companyMenuItems as $item)
                         <li>
-                            <a href="about-us.html">About Us</a>
+                            <a href="{{ $item->link }}">{{ $item->title }}</a>
                         </li>
-                        <li>
-                            <a href="en/blogs.html">Blogs</a>
-                        </li>
-                        <li>
-                            <a href="fleet-reviews.html">Reviews</a>
-                        </li>
-                        <li>
-                            <a href="faq.html">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="our-team.html">Our Team</a>
-                        </li>
-                       
-                    </ul>
-                </div>
-                <div class="col-md-auto mt-5 mt-md-0">
-                    <h6 class="mb-3 text-uppercase">Services</h6>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="index.html">Car Rental</a>
-                        </li>
-                        <li>
-                            <a href="attractions.html">Attractions</a>
-                        </li>
-                        <!-- <li>
-                        <a href="/hotel">Hotel</a>                    </li> -->
+                    @endforeach
+
+
+                </ul>
+            </div>
+            <div class="col-md-auto mt-5 mt-md-0">
+                <h6 class="mb-3 text-uppercase">Services</h6>
+                <ul class="list-unstyled">
+                    @foreach($enabledCategories as $category)
+                    <li>
+                        <a href="{{ url($category->slug) }}">
+                            {{ $category->title }}
+                        </a>
+                    </li>
+                @endforeach
+
                     </ul>
                     <h6 class="mb-3 text-uppercase mt-5">Legal</h6>
                     <ul class="list-unstyled">
+
+                        @foreach ($legalMenuItems as $item)
                         <li>
-                            <a href="terms-and-conditions.html">Terms and Conditions</a>
+                            <a href="{{ $item->link }}">{{ $item->title }}</a>
                         </li>
-                        <li>
-                            <a href="privacy-policy.html">Privacy Policy</a>
-                        </li>
-                        <li><a href="https://MRR HOLIDAYS.tawk.help/" target="_blank">Help Center</a></li>
+                    @endforeach
+                        {{--  <li><a href="https://MRR HOLIDAYS.tawk.help/" target="_blank">Help Center</a></li>  --}}
                     </ul>
                 </div>
                 <div class="col-md-auto mt-5 mt-md-0">
                     <h6 class="mb-3 text-uppercase">Top Attractions</h6>
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="attractions/langkawi-premium-cruise.html">Langkawi Premium Cruise<span
-                                    class="text-warning fw-bold new-word">NEW</span></a>
-                        </li>
-                        <li>
-                            <a href="attractions/maha-tower-langkawi.html">Maha Tower Langkawi<span
-                                    class="text-warning fw-bold new-word">NEW</span></a>
-                        </li>
-                        <li>
-                            <a href="attractions/dream-forest-langkawi.html">Dream Forest Langkawi<span
-                                    class="text-warning fw-bold new-word">NEW</span></a>
-                        </li>
-                        <li>
-                            <a href="attractions/langkawi-skycab-cable-car.html">Langkawi SkyCab Cable Car</a>
-                        </li>
-                        <li>
-                            <a href="attractions/langkawi-mangrove-tour.html">Langkawi Mangrove Tour</a>
-                        </li>
-                        <li>
-                            <a href="attractions/island-hopping-langkawi.html">Langkawi Island Hopping Tour</a>
-                        </li>
-                        <li>
-                            <a href="attractions/underwater-world-langkawi.html">Underwater World Langkawi</a>
-                        </li>
-                        <li>
-                            <a href="attractions/atv-adventure-ride.html">ATV Adventure Ride</a>
-                        </li>
+                        @foreach($attractions as $attraction)
+                            <li>
+                                <a href="{{ url('attractions/' . $attraction->slug . '.html') }}">
+                                    {{ $attraction->title }}
+                                    @if($attraction->created_at >= now()->subDays(10))
+                                        <span class="fw-bold new-word" style="color: ">NEW</span>
+                                    @endif
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
+
                 <div class="col-md-auto mt-5 mt-md-0">
                     <h6 class="text-uppercase mb-3">Address</h6>
                     <div>
-                        <a href="https://maps.app.goo.gl/18nUAdf7kXY8bDmT6" target="_blank">LOT 6, BUKIT NAU,<br>
-                            JALAN LAPANGAN TERBANG,<br>
-                            PADANG MATSIRAT,<br>
-                            07000 LANGKAWI,<br>
-                            KEDAH.<br><br></a>
+                        {!! nl2br(getset('address')) !!}
                         LB Travel Tech Sdn Bhd<br>
                        123456789<br>
                     </div>
                 </div>
-           
+
             </div>
         </div>
         <div class="bg-white text-dark p-4 mt-5">
@@ -255,11 +247,11 @@ $enabledCategories = Category::where('is_enable', 1)->get();
                         <div class="ft-cpt-img d-flex align-items-center justify-content-center">
                             <img src="img/logo/logo.png" class="img-fluid logo text-center" alt="">
                         </div>
-                       
+
                         <div class="mt-2 text-muted text-center">
                             &copy; Copyright 2025  MRR HOLIDAYS. All rights reserved. </div>
                     </div>
-               
+
                 </div>
             </div>
         </div>

@@ -31,7 +31,7 @@ class CategoryController extends Controller
     |
     */
 
- 
+
     /**
      * Create a new controller instance.
      *
@@ -53,15 +53,15 @@ class CategoryController extends Controller
                });
             }
 
-    
+
             $count = $query->get();
 
             $records = $query->skip($request->start)
             ->take($request->length)
             ->get();
-            
+
             $data = [];
-       
+
             foreach ($records as $key => $value) {
 
                 $is_enable = $value->is_enable ? 'checked' : '';
@@ -82,13 +82,13 @@ class CategoryController extends Controller
 
                 $action .= '<a class="btn btn-info me-2" href="'.URL::to('admin/categories/edit/'.Crypt::encryptString($value->id)).'">Edit</a>';
                 $action .= '<a class="btn btn-primary me-2" href="'.URL::to('admin/categories/subcategories/'.Crypt::encryptString($value->id)).'">Add Subcategories</a>';
-                $action .= '<a class="btn btn-danger" href="'.URL::to('admin/categories/delete/'.Crypt::encryptString($value->id)).'">Delete</a>';
+                // $action .= '<a class="btn btn-danger" href="'.URL::to('admin/categories/delete/'.Crypt::encryptString($value->id)).'">Delete</a>';
 
                 $action .= '</div>';
 
                 // $img = $value->image ? asset('public/'.$value->image->path) : '';
                 $img = $value->image ? asset($value->image->path) : '';
-              
+
                 array_push($data,[
                     $value->id,
                    "<img style='width:50px;' src='".$img."' />",
@@ -101,7 +101,7 @@ class CategoryController extends Controller
                     <input data-id="'.Crypt::encryptString($value->id).'" '.$is_featured.' type="checkbox"  class="is_featured js-switch" data-color="#009efb"/></div>',
                     $action,
                  ]
-                );       
+                );
             }
 
             return response()->json([
@@ -125,16 +125,16 @@ class CategoryController extends Controller
 
         if($request->ajax()){
 
-           
+
 
             if($request->has('data')){
                 foreach ($request->data as $key => $category) {
-                  
+
                     Category::where('id',$category['id'])->update([
                         "sort" => $key,
                         "parent_id" => null,
                     ]);
-                    
+
 
                     if(isset($category['children'])){
                         foreach ($category['children'] as $subkey => $subCategory) {
@@ -168,7 +168,7 @@ class CategoryController extends Controller
         where('parent_id',null)
         ->orderby('sort')
         ->get();
-              
+
         return view('admin.categories.sort',compact('categories'));
     }
 
@@ -215,18 +215,18 @@ class CategoryController extends Controller
                 ->withInput();
         }
 
-        $level = 1; 
-        $parent_id = null; 
+        $level = 1;
+        $parent_id = null;
 
         if($request->parent_id == null && $request->parent_id == ''){
-            $level = 1; 
-            $parent_id = null; 
+            $level = 1;
+            $parent_id = null;
         }else{
             $explode =  explode('-',$request->parent_id);
-            $level = $explode[1]; 
-            $parent_id = $explode[0]; 
+            $level = $explode[1];
+            $parent_id = $explode[0];
         }
-        
+
         $ProductCategory = Category::create([
             'title' => $request->title,
             "slug" => $request->slug,
@@ -240,11 +240,11 @@ class CategoryController extends Controller
             'meta_keywords' => $request->meta_keywords,
         ]);
 
-        return redirect('/admin/categories/index')->with('success','Record Created Success'); 
+        return redirect('/admin/categories/index')->with('success','Record Created Success');
 
     }
 
-   
+
 
      /**
      * Create a new controller instance.
@@ -253,10 +253,10 @@ class CategoryController extends Controller
      */
     public function edit(Request $request,$id)
     {
-        
+
         $id = Crypt::decryptString($id);
         $model = Category::find($id);
-        if($model == false){  
+        if($model == false){
             return back()->with('error','Record Not Found');
          }
 
@@ -279,7 +279,7 @@ class CategoryController extends Controller
     {
         // dd($request->all());
 
-    
+
         $id = Crypt::decryptString($id);
         $validator = Validator::make($request->all(), [
             "title" => 'required|max:255',
@@ -303,7 +303,7 @@ class CategoryController extends Controller
         }
 
         $category = Category::find($id);
-        if($category == false){  
+        if($category == false){
            return back()->with('error','Record Not Found');
         }
 
@@ -347,33 +347,33 @@ class CategoryController extends Controller
 
 
             $data->delete();
-            return redirect('/admin/categories/index')->with('success','Record Deleted Success'); 
+            return redirect('/admin/categories/index')->with('success','Record Deleted Success');
         }
 
     }
 
-    
 
- 
+
+
     public function showSubcategories($encryptedId)
     {
         try {
-            $id = Crypt::decryptString($encryptedId); 
-            
-   
+            $id = Crypt::decryptString($encryptedId);
+
+
             $category = Category::findOrFail($id);
-    
-          
+
+
             $subcategories = Subcategory::where('category_id', $category->id)->get();
-    
-         
+
+
             return view('admin.categories.subcat', compact('category', 'subcategories'));
         } catch (\Exception $e) {
-            return abort(404); 
+            return abort(404);
         }
     }
-    
-  
+
+
     public function storesubcat(Request $request)
     {
         // Validation with optional fields
@@ -381,33 +381,33 @@ class CategoryController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'cateid' => 'required|string|max:255',
-            'image' => 'nullable|integer',  
-            'meta_title' => 'nullable|string|max:255',  
-            'meta_description' => 'nullable|string',  
-            'meta_keywords' => 'nullable|string',  
-            'details' => 'nullable|string',  
+            'image' => 'nullable|integer',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
+            'details' => 'nullable|string',
         ]);
-    
-    
+
+
         $subcategory = new Subcategory();
         $subcategory->title = $request->title;
         $subcategory->slug = $request->slug;
-        $subcategory->category_id = $request->cateid; 
+        $subcategory->category_id = $request->cateid;
         $subcategory->image_id = $request->image;
         $subcategory->meta_title = $request->meta_title;
         $subcategory->meta_description = $request->meta_description;
         $subcategory->meta_keywords = $request->meta_keywords;
         $subcategory->details = $request->details;
         $subcategory->save();
-    
+
         // Redirect or return response
         return redirect()->route('categories.index');
     }
-    
-
-    
 
 
 
-    
+
+
+
+
 }

@@ -2170,92 +2170,52 @@ Launch demo modal
                 <h2 class="text-center text-primary mt-3">News & Promotions</h2>
 
                 <div class="row gx-lg-8 mt-4 mt-md-5">
-                    <div class="col-md-6 order-md-2">
-                        <img src="uploads/blog/1015760275.jpg" class="img-fluid" alt="">
-                        <h5 class="mt-3">
-                            <a href="blogs/top-10-things-to-do-in-langkawi-during-new-year.html"
-                                class="link-dark">Top 10 Things to Do in Langkawi During New Year 2025</a>
-                        </h5>
-                        <div class="mb-1">
-                            <a href="blogs/top-10-things-to-do-in-langkawi-during-new-year.html"
-                                class="text-dark">Langkawi is an amazing choice when you&rsquo;re deciding where to
-                                go for New Year celebration with your family in 2025. There are plenty of beaches to
-                                catch the amazing fireworks! Besides, it&rsquo;ll also be a relaxing getaway while
-                                ushering in...</a>
-                        </div>
-                        <a href="blogs/top-10-things-to-do-in-langkawi-during-new-year.html"
-                            class="btn btn-light btn-sm">Read more</a>
-                    </div>
-                    <div class="col-md-6 mt-4 mt-md-0 d-flex flex-column gap-4 order-md-1">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="uploads/blog/1018678122.jpg" style="height: 120px; width: 100%; object-fit: cover;"
-                                    class="img-fluid" alt="">
-                            </div>
-                            <div class="col-md">
-                                <h5 class="mt-3 mt-md-0">
-                                    <a href="blogs/langkawi-international-regatta-2025.html"
-                                        class="link-dark">Langkawi International Regatta 2025: A Sailing Spectacular
-                                        Royal Langkawi Yacht Club, Langkawi, Malaysia January 20-25, 2025</a>
-                                </h5>
-                                <div class="mb-1">
-                                    <a href="blogs/langkawi-international-regatta-2025.html" class="text-dark">Ahoy
-                                        mateys! Prepare to be swept away by the grandeur of the upcoming 2025
-                                        Langkawi International Regatta (RLIR), one of Asia&#39;s most prestigious
-                                        sailing spectacles. From January 20th to 25th, 2025, the idyllic island of
-                                        Langkawi, Malaysia,...</a>
-                                </div>
-                                <a href="blogs/langkawi-international-regatta-2025.html"
-                                    class="btn btn-light btn-sm">Read more</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="uploads/blog/1043757971.png"
-                                    class="img-fluid" alt="">
-                            </div>
-                            <div class="col-md">
-                                <h5 class="mt-3 mt-md-0">
-                                    <a href="blogs/year-end-sale-2024-enjoy-exclusive-discounts-on-langkawi-car-rentals-%26-attractions%21.html"
-                                        class="link-dark">Year-End Sale 2024: Exclusive Langkawi Car Rental
-                                        Discounts!</a>
-                                </h5>
-                                <div class="mb-1">
-                                    <a href="blogs/year-end-sale-2024-enjoy-exclusive-discounts-on-langkawi-car-rentals-%26-attractions%21.html"
-                                        class="text-dark">It&#39;s End-Year Sale 2024, Enjoy Exclusive Discounts on
-                                        Langkawi Car Rentals &amp; Attractions!
+                    <?php
+                    $blogs = collect($blogs)->shuffle();
 
-                                        Hello, Holiday Seekers and Travel Enthusiasts! As the year comes to a close,
-                                        MRR HOLIDAYS is here to make your holiday season even more memorable...</a>
-                                </div>
-                                <a href="blogs/year-end-sale-2024-enjoy-exclusive-discounts-on-langkawi-car-rentals-%26-attractions%21.html"
-                                    class="btn btn-light btn-sm">Read more</a>
+
+                    $bigBlog = $blogs->shift();
+                    ?>
+
+                    <div class="row gx-lg-8 mt-4 mt-md-5">
+                        {{-- Big Image --}}
+                        <div class="col-md-6 order-md-2">
+                            <img src="<?php echo $bigBlog->image_path; ?>" class="img-fluid" alt="">
+                            <h5 class="mt-3">
+                                <a href="blogs/<?php echo $bigBlog->slug; ?>" class="link-dark"><?php echo $bigBlog->title; ?></a>
+                            </h5>
+                            <div class="mb-1">
+                                <a href="blogs/<?php echo $bigBlog->slug; ?>" class="text-dark">
+                                    <?php echo substr($bigBlog->description, 0, 200); ?>...
+                                </a>
                             </div>
+                            <a href="blogs/<?php echo $bigBlog->slug; ?>" class="btn btn-light btn-sm">Read more</a>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="uploads/blog/1068028948.jpg"
-                                    class="img-fluid" alt="">
-                            </div>
-                            <div class="col-md">
-                                <h5 class="mt-3 mt-md-0">
-                                    <a href="blogs/the-new-face-of-eagle-square-langkawi-iconic-landmark.html"
-                                        class="link-dark">Discover The New Face of Eagle Square: Langkawi’s Iconic
-                                        Landmark</a>
-                                </h5>
-                                <div class="mb-1">
-                                    <a href="blogs/the-new-face-of-eagle-square-langkawi-iconic-landmark.html"
-                                        class="text-dark">Imagine standing on the shores of Langkawi, watching a
-                                        radiant sunset with the silhouette of a soaring eagle rising before
-                                        you&mdash;a true symbol of strength, freedom, and nature&rsquo;s beauty.
-                                        This is Eagle Square, or Dataran Lang, one of...</a>
+
+                        {{-- Small Images --}}
+                        <div class="col-md-6 mt-4 mt-md-0 d-flex flex-column gap-4 order-md-1">
+                            <?php foreach ($blogs as $blog): ?>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="<?php echo $blog->image_path; ?>" style="height: 120px; width: 100%; object-fit: cover;" class="img-fluid" alt="">
                                 </div>
-                                <a href="blogs/the-new-face-of-eagle-square-langkawi-iconic-landmark.html"
-                                    class="btn btn-light btn-sm">Read more</a>
+                                <div class="col-md">
+                                    <h5 class="mt-3 mt-md-0">
+                                        <a href="blogs/<?php echo $blog->slug; ?>" class="link-dark"><?php echo $blog->title; ?></a>
+                                    </h5>
+                                    <div class="mb-1">
+                                        <a href="blogs/<?php echo $blog->slug; ?>" class="text-dark">
+                                            <?php echo substr($blog->description, 0, 100); ?>...
+                                        </a>
+                                    </div>
+                                    <a href="blogs/<?php echo $blog->slug; ?>" class="btn btn-light btn-sm">Read more</a>
+                                </div>
                             </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 

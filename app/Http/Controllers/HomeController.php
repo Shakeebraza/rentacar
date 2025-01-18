@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\Part\HtmlPart;
-
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
 
@@ -117,8 +117,17 @@ class HomeController extends Controller
                  'filemanager.path as image_path') // Select image path from filemanager
         ->where('product_reviews.active', 1)
         ->get();
+        $blogs = DB::table('blogs')
+        ->leftJoin('filemanager', 'blogs.image_id', '=', 'filemanager.id')
+        ->leftJoin('users', 'blogs.user_id', '=', 'users.id')
+        ->select(
+            'blogs.*',
+            'filemanager.path as image_path',
+            'users.name as user_name'
+        )
+        ->get();
 
-        return view('theme.home',compact('categories','products','sliders','reviews'));
+        return view('theme.home',compact('categories','products','sliders','reviews','blogs'));
 
     }
 

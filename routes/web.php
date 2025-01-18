@@ -14,8 +14,8 @@ use App\Models\User;
 */
 
 Route::get('/',function(){
-    
-    return redirect('/admin/login'); 
+
+    return redirect('/admin/login');
 });
 
 
@@ -49,10 +49,10 @@ Route::get('/order-confirmaton/{id}', [App\Http\Controllers\CheckoutController::
 Route::post('/checkout/submit', [App\Http\Controllers\CheckoutController::class, 'checkout_submit']);
 Route::get('/get_invoice/{id}', [App\Http\Controllers\CheckoutController::class, 'get_invoice']);
 
-// testing 
+// testing
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'test']);
 
-// Website login 
+// Website login
 Route::get('/login', [App\Http\Controllers\WebAuthController::class, 'login'])->name('weblogin');
 Route::get('/register', [App\Http\Controllers\WebAuthController::class, 'register'])->name('register');
 Route::get('/forgotpassword', [App\Http\Controllers\WebAuthController::class, 'forgotPassword'])->name('forgotpassword');
@@ -60,7 +60,7 @@ Route::post('/createaccount', [App\Http\Controllers\WebAuthController::class, 'c
 Route::post('/weblogin', [App\Http\Controllers\WebAuthController::class, 'webLogin']);
 Route::post('/password-reset-request', [App\Http\Controllers\WebAuthController::class, 'sendResetLink'])->name('resetpassword');
 
-// dashboard login Group 
+// dashboard login Group
 Route::middleware(['webLoginChk'])->group(function () {
   Route::get('/dashboard', [App\Http\Controllers\WebAuthController::class, 'dashboard'])->name('dashboard');
   Route::get('/logout', [App\Http\Controllers\WebAuthController::class, 'weblogout'])->name('weblogout');
@@ -112,7 +112,7 @@ Route::get('/admin/status', [App\Http\Controllers\Admin\DashboardController::cla
   Route::get('/admin/menus_items/edit/{id}', [App\Http\Controllers\Admin\MenuItemController::class, 'edit']);
   Route::post('/admin/menus_items/update/{id}', [App\Http\Controllers\Admin\MenuItemController::class, 'update']);
   Route::get('/admin/menus_items/delete/{id}', [App\Http\Controllers\Admin\MenuItemController::class, 'delete']);
-  
+
 
 //products
     Route::get('/admin/products/index', [App\Http\Controllers\Admin\ProductController::class, 'index']);
@@ -129,12 +129,15 @@ Route::get('/admin/status', [App\Http\Controllers\Admin\DashboardController::cla
     Route::get('/admin/orders/index', [App\Http\Controllers\Admin\OrderController::class, 'index']);
     Route::get('/admin/orders/edit/{id}', [App\Http\Controllers\Admin\OrderController::class, 'edit']);
     Route::post('/admin/orders/update/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update']);
-    
+
+    //Review
+    // Route::get('admin/review/index', [App\Http\Controllers\Admin\ReviewController::class, 'index']);
+    Route::get('admin/review/index', [App\Http\Controllers\ReviewController::class, 'index']);
     // client Report
     Route::get('/admin/reports/clients/index', [App\Http\Controllers\Admin\ReportsController::class, 'clientIndex']);
-    
-    
-    
+
+
+
     //Sliders
     Route::get('/admin/sliders/index', [App\Http\Controllers\Admin\SliderController::class, 'index']);
     Route::get('/admin/sliders/create', [App\Http\Controllers\Admin\SliderController::class, 'create']);
@@ -142,8 +145,8 @@ Route::get('/admin/status', [App\Http\Controllers\Admin\DashboardController::cla
     Route::get('/admin/sliders/edit/{id}', [App\Http\Controllers\Admin\SliderController::class, 'edit']);
     Route::post('/admin/sliders/update/{id}', [App\Http\Controllers\Admin\SliderController::class, 'update']);
     Route::get('/admin/sliders/delete/{id}', [App\Http\Controllers\Admin\SliderController::class, 'delete']);
-    
-    
+
+
     //Collections
     Route::get('/admin/collections/index', [App\Http\Controllers\Admin\CollectionController::class, 'index']);
     Route::get('/admin/collections/create', [App\Http\Controllers\Admin\CollectionController::class, 'create']);
@@ -151,7 +154,7 @@ Route::get('/admin/status', [App\Http\Controllers\Admin\DashboardController::cla
     Route::get('/admin/collections/edit/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'edit']);
     Route::post('/admin/collections/update/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'update']);
     Route::get('/admin/collections/delete/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'delete']);
-    
+
     //page
     Route::get('/admin/page/index', [App\Http\Controllers\Admin\PageController::class, 'index']);
     Route::get('/admin/page/edit/{id}', [App\Http\Controllers\Admin\PageController::class, 'edit']);
@@ -159,7 +162,7 @@ Route::get('/admin/status', [App\Http\Controllers\Admin\DashboardController::cla
     Route::post('/admin/page/store', [App\Http\Controllers\Admin\PageController::class, 'store']);
     Route::post('/admin/page/update/{id}', [App\Http\Controllers\Admin\PageController::class, 'update']);
     Route::get('/admin/page/delete/{id}', [App\Http\Controllers\Admin\PageController::class, 'delete']);
-    
+
     //products category
     Route::get('/admin/categories/index', [App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('categories.index');;
     Route::get('admin/categories/subcategories/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'showSubcategories']);
@@ -195,5 +198,5 @@ Route::delete('/admin/subcategory/{id}', [App\Http\Controllers\Admin\CategoryCon
 // Auth::routes();
 
 Route::fallback(function () {
-    return redirect('/'); 
+    return redirect('/');
 });

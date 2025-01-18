@@ -17,21 +17,22 @@
     <link href="{{asset('admin/assets/node_modules/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    
+
+
     <style>
         .menu-button:hover{
             color: #03a9f3;
         }
-    </style>    
+    </style>
     @yield('css')
-  
+
 </head>
 <body class="skin-blue fixed-layout">
 
-    <?php 
-    //   dd($global_d['site_title']);    
+    <?php
+    //   dd($global_d['site_title']);
     ?>
-    
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -41,18 +42,18 @@
             <p class="loader__label">{{$global_d['site_title']}}</p>
         </div>
     </div>
-    
+
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        
+
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                
+
                 <!-- ============================================================== -->
                 <!-- Logo -->
                 <!-- ============================================================== -->
@@ -63,22 +64,22 @@
                             <!-- Dark Logo icon -->
                             <img src="{{asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
-                            
+
                             <img src="{{asset('admin/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                          <!-- dark Logo text -->
                          <img src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
-                         <!-- Light Logo text -->    
+                         <!-- Light Logo text -->
                          <img src="{{asset('admin/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" /></span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-                
+
                 <div class="navbar-collapse">
-                    
+
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
@@ -95,17 +96,17 @@
                             </form>
                         </li>
                     </ul>
-                    
+
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
-                 
 
-        
-                      
-                      
-                       
+
+
+
+
+
 
 
                         <!-- ============================================================== -->
@@ -113,15 +114,15 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown u-pro">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <img src="{{asset('admin/assets/images/users/1.jpg')}}" alt="user" class=""> 
-                              <span class="hidden-md-down">Mark &nbsp;<i class="fa fa-angle-down"></i></span> 
+                              <img src="{{asset('admin/assets/images/users/1.jpg')}}" alt="user" class="">
+                              <span class="hidden-md-down">Mark &nbsp;<i class="fa fa-angle-down"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end animated flipInY">
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> Change Password</a>
-                                
+
                                 <a href="javascript:void(0)" class="right-side-toggle dropdown-item"><i class="ti-settings"></i> Settings</a>
-                              
+
                                 <a href="{{URL::to('/admin/logout')}}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                             </div>
                         </li>
@@ -135,7 +136,7 @@
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
-      
+
 
 
         <!-- ============================================================== -->
@@ -148,7 +149,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
 
-                        <li><a class=" waves-effect waves-dark" href="{{URL::to('admin/dashboard')}}" 
+                        <li><a class=" waves-effect waves-dark" href="{{URL::to('admin/dashboard')}}"
                             aria-expanded="false"><i class="icon-speedometer"></i>
                             <span class="hide-menu">Dashboard</span></a>
                         </li>
@@ -160,7 +161,7 @@
                                 <li><a href="{{URL::to('admin/users/index')}}">All Users</a></li>
                             </ul>
                         </li>
-                        
+
                         {{-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i>
                             <span class="hide-menu"> Roles </span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -171,7 +172,7 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-menu"></i>
                             <span class="hide-menu"> Menus </span></a>
-                            
+
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{URL::to('admin/menus/create')}}">Add New Menus</a></li>
                                 <li><a href="{{URL::to('admin/menus/index')}}">All Menus</a></li>
@@ -179,14 +180,14 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-google-pages"></i>
                             <span class="hide-menu"> Pages </span></a>
-                            
+
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{URL::to('admin/page/create')}}">Add New pages</a></li>
                                 <li><a href="{{URL::to('admin/page/index')}}">All pages</a></li>
                             </ul>
                         </li>
 
-                        <li><a class="has-arrow waves-effect waves-dark" 
+                        <li><a class="has-arrow waves-effect waves-dark"
                             href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-folder-multiple-image"></i>
                             <span class="hide-menu"> Slider </span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -220,15 +221,20 @@
                             </ul>
                         </li>
 
-                        <li><a class="waves-effect waves-dark" 
-                            href="{{URL::to('admin/orders/index')}}" 
+                        <li><a class="waves-effect waves-dark"
+                            href="{{URL::to('admin/orders/index')}}"
                             aria-expanded="false"><i class="ti-money"></i>
                             <span class="hide-menu"> Orders </span></a>
+                        </li>
+                        <li><a class="waves-effect waves-dark"
+                            href="{{URL::to('admin/review/index')}}"
+                            aria-expanded="false"><i class="ti-star"></i>
+                            <span class="hide-menu"> Review </span></a>
                         </li>
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-monitor"></i>
                             <span class="hide-menu"> Report </span></a>
-                            
+
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{URL::to('admin/reports/clients/index')}}">Customer</a></li>
                                 <li><a href="{{URL::to('admin/products/index')}}">Admin Report</a></li>
@@ -248,7 +254,7 @@
                             <ul aria-expanded="false" class="collapse">
                                @foreach (explode(',',$global_d['grouping']) as $item)
                                 <li><a href="{{URL::to('admin/settings/edit')}}?group={{$item}}">
-                                  {{ ucwords(str_ireplace("_", " ",$item))}}</a></li>  
+                                  {{ ucwords(str_ireplace("_", " ",$item))}}</a></li>
                                @endforeach
                             </ul>
                         </li>
@@ -272,7 +278,7 @@
 
               @yield('content')
 
-          
+
                 <!-- Right sidebar -->
                 <!-- ============================================================== -->
                 <!-- .right-sidebar -->
@@ -296,7 +302,7 @@
                                 <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
                             </ul>
-                      
+
                         </div>
                     </div>
                 </div>
@@ -309,23 +315,23 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-      
+
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-      
+
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © 2024 {{$global_d['site_title']}} Developed by 
+            © 2024 {{$global_d['site_title']}} Developed by
             <a href="https://www.azamsolutions.com/">azamsolutions.com</a>
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->
-   
+
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -346,14 +352,14 @@
     <script src="{{asset('admin/assets/js/perfect-scrollbar.jquery.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/waves.js')}}"></script>
     <script src="{{asset('admin/assets/js/custom.js')}}"></script>
-    
+
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    
+
 
 
     @if(Session::get('success'))
-    <script> 
+    <script>
     $.toast({
             heading: "{{Session::get('success')}}",
             // text: "{{Session::get('success')}}",
@@ -367,7 +373,7 @@
     @endif
 
     @if(Session::get('error'))
-    <script> 
+    <script>
       $.toast({
             heading: "{{Session::get('error')}}",
             // text: "{{Session::get('success')}}",
@@ -381,7 +387,7 @@
     @endif
 
     @if(Session::get('warning'))
-    <script> 
+    <script>
       $.toast({
             heading: "{{Session::get('warning')}}",
             // text: "{{Session::get('success')}}",
@@ -399,6 +405,6 @@
     <!-- Pages JS -->
     <!-- ============================================================== -->
     @yield('js')
-    
+
  </body>
 </html>
