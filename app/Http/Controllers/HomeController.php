@@ -126,8 +126,9 @@ class HomeController extends Controller
             'users.name as user_name'
         )
         ->get();
+        $randomSlider = Slider::where('alignment', 'Home')->inRandomOrder()->first();
 
-        return view('theme.home',compact('categories','products','sliders','reviews','blogs'));
+        return view('theme.home',compact('categories','products','sliders','reviews','blogs','randomSlider'));
 
     }
 

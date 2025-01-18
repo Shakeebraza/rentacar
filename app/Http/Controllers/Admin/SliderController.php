@@ -36,7 +36,7 @@ class SliderController extends Controller
     |
     */
 
- 
+
     /**
      * Create a new controller instance.
      * @return void
@@ -62,7 +62,7 @@ class SliderController extends Controller
             $records = $query->skip($request->start)
             ->take($request->length)->orderBy('id','desc')
             ->get();
-            
+
             $data = [];
             foreach ($records as $key => $value) {
 
@@ -71,7 +71,7 @@ class SliderController extends Controller
                 $action .= '<a class="btn btn-danger" href="'.URL::to('admin/sliders/delete/'.Crypt::encryptString($value->id)).'">Delete</a>';
 
                 $action .= '</div>';
-                $img = $value->image ? asset('public/'.$value->image->path) : '';
+                $img = $value->image ? asset($value->image->path) : '';
 
                 array_push($data,[
                     $value->id,
@@ -80,7 +80,7 @@ class SliderController extends Controller
                     $value->is_enable ? 'Approved' : 'Pending',
                     $action,
                  ]
-                );       
+                );
             }
 
             return response()->json([
@@ -90,7 +90,7 @@ class SliderController extends Controller
                 'data'=> $data,
             ]);
         }
-              
+
         return view('admin.sliders.index');
     }
 
@@ -123,14 +123,14 @@ class SliderController extends Controller
             "alignment" => 'max:255|required',
             "button" => 'required|max:255',
         ]);
-        
+
 
         if($validator->fails()){
             return back()
             ->withErrors($validator)
             ->withInput();
         }
-        
+
         $product_category = Slider::create([
             'title' => $request->title,
             "details" => $request->details,
@@ -142,11 +142,11 @@ class SliderController extends Controller
             "button" => $request->button,
         ]);
 
-        return redirect('/admin/sliders/index')->with('success','Record Created Success'); 
+        return redirect('/admin/sliders/index')->with('success','Record Created Success');
 
     }
 
-   
+
 
      /**
      * Create a new controller instance.
@@ -155,10 +155,10 @@ class SliderController extends Controller
      */
     public function edit(Request $request,$id)
     {
-        
+
         $id = Crypt::decryptString($id);
         $model = Slider::find($id);
-        if($model == false){  
+        if($model == false){
             return back()->with('error','Record Not Found');
          }
 
@@ -173,7 +173,7 @@ class SliderController extends Controller
      * @return void
      */
     public function update(Request $request,$id)
-    {    
+    {
         $id = Crypt::decryptString($id);
         $validator = Validator::make($request->all(),[
             "title" => 'required|max:255',
@@ -194,7 +194,7 @@ class SliderController extends Controller
 
 
         $model = Slider::find($id);
-        if($model == false){  
+        if($model == false){
            return back()->with('error','Record Not Found');
         }
 
@@ -227,22 +227,22 @@ class SliderController extends Controller
         }else{
 
             $data->delete();
-            return redirect('/admin/sliders/index')->with('success','Record Deleted Success'); 
+            return redirect('/admin/sliders/index')->with('success','Record Deleted Success');
         }
 
     }
 
-    
-
- 
-    
-
-  
-
-
-    
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
 }

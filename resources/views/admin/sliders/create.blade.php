@@ -36,11 +36,11 @@
 
                     <div class="form-group">
                         <label class="form-label" >Title</label>
-                        <input required type="text" value="{{old('title')}}" name="title" class="form-control " 
+                        <input required type="text" value="{{old('title')}}" name="title" class="form-control "
                         placeholder="Title">
                         @if($errors->has('title'))
                          <p class="invalid-feedback" >{{ $errors->first('title') }}</p>
-                        @endif 
+                        @endif
                     </div>
 
                     <div class="form-group">
@@ -48,53 +48,53 @@
                          <textarea placeholder="Details" name="details" class="form-control" >{{old('details')}}</textarea>
                           @if($errors->has('details'))
                           <p class="invalid-feedback" >{{ $errors->first('details') }}</p>
-                          @endif 
+                          @endif
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" >Button</label>
-                        <input required type="text" value="{{old('button')}}" name="button" class="form-control " 
+                        <input required type="text" value="{{old('button')}}" name="button" class="form-control "
                         placeholder="button">
                         @if($errors->has('button'))
                          <p class="invalid-feedback" >{{ $errors->first('button') }}</p>
-                        @endif 
+                        @endif
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" >Link</label>
-                        <input required type="text" value="{{old('link')}}" name="link" class="form-control" 
+                        <input required type="text" value="{{old('link')}}" name="link" class="form-control"
                         placeholder="Link">
                         @if($errors->has('link'))
                          <p class="invalid-feedback" >{{ $errors->first('link') }}</p>
-                        @endif 
+                        @endif
                     </div>
 
                      <div class="form-group">
                         <label class="form-label" >Image</label>
-                          <input type="text" value="{{old('image_id')}}" name="image_id" class="form-control" placeholder="Image"> 
+                          <input type="text" value="{{old('image_id')}}" name="image_id" class="form-control" placeholder="Image">
                           @if($errors->has('image_id'))
                           <p class="invalid-feedback" >{{ $errors->first('image_id') }}</p>
-                          @endif 
+                          @endif
                       </div>
 
                       <div class="form-group">
                           <label class="form-label">Sort</label>
-                          <input type="number" required value="{{old('sort')}}" name="sort" class="form-control" placeholder="Sort"> 
+                          <input type="number" required value="{{old('sort')}}" name="sort" class="form-control" placeholder="Sort">
                           @if($errors->has('sort'))
                           <p class="invalid-feedback" >{{ $errors->first('sort') }}</p>
-                          @endif 
+                          @endif
                       </div>
 
                       <div class="form-group">
                         <label class="form-label">Alignment</label>
                         <select class="form-control" name="alignment" >
-                            <option {{old('alignment') ==  'left' ? 'selected' : ''}} value="left">left</option>
-                            <option {{old('alignment') ==  'center' ? 'selected' : ''}} value="center">center</option>
-                            <option {{old('alignment') ==  'right' ? 'selected' : ''}} value="right" >right</option>
+                            <option {{old('alignment') ==  'Home' ? 'selected' : ''}} value="Home">Home</option>
+                            <option {{old('alignment') ==  'Attractions' ? 'selected' : ''}} value="Attractions">Attractions</option>
+
                         </select>
                         @if($errors->has('alignment'))
                         <p class="invalid-feedback" >{{ $errors->first('alignment') }}</p>
-                        @endif 
+                        @endif
                       </div>
 
 
@@ -106,7 +106,7 @@
                         </select>
                         @if($errors->has('is_enable'))
                         <p class="invalid-feedback" >{{ $errors->first('is_enable') }}</p>
-                        @endif 
+                        @endif
                       </div>
 
                     <div class="form-group row">
@@ -126,9 +126,9 @@
 
 <script>
 
-    
-      
+
+
 
 </script>
-    
+
 @endsection

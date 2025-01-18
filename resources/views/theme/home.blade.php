@@ -92,12 +92,12 @@ Launch demo modal
 
 
 
+        <section class="hero" style="background: url('{{ asset($randomSlider->image->path) }}') !important">
 
-        <section class="hero">
             <div class="container">
                 <div class="text-center">
-                    <h1 class="text-white mb-0 display-5 fw-bold">MRR HOLIDAYS Rental</h1>
-                    <h3 class="text-white mb-4 mt-3">From Island to Island</h3>
+                    <h1 class="text-white mb-0 display-5 fw-bold">{{ $randomSlider->title }}</h1>
+                    <h3 class="text-white mb-4 mt-3">{{ $randomSlider->details }}</h3>
                 </div>
 
                 <div>
