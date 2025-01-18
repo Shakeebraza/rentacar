@@ -27,7 +27,7 @@ function getProductTypesByCategory($categoryId)
 @section('css')
 
 <style>
-   
+
 </style>
 
 @endsection
@@ -35,7 +35,7 @@ function getProductTypesByCategory($categoryId)
 <main class="main">
     <div>
 
- 
+
 
         <!-- Button trigger modal -->
         <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -91,7 +91,7 @@ Launch demo modal
 
 
 
-     
+
 
         <section class="hero">
             <div class="container">
@@ -2014,20 +2014,20 @@ Launch demo modal
         <section class="my-7">
             <div class="container">
                 <h2 class="text-center text-primary p-3">Our Vehicles</h2>
-                <?php 
+                <?php
                 $ourTypes = getProductTypesByCategory(44); // Get product types for category 44
                 $isActive = true; // To set the first tab as active
                 ?>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <?php foreach ($ourTypes as $index => $type): ?>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link <?= $isActive ? 'active' : '' ?>" 
-                                    id="<?= strtolower($type) ?>-tab" 
-                                    data-bs-toggle="tab" 
-                                    data-bs-target="#<?= strtolower($type) ?>" 
-                                    type="button" 
-                                    role="tab" 
-                                    aria-controls="<?= strtolower($type) ?>" 
+                            <button class="nav-link <?= $isActive ? 'active' : '' ?>"
+                                    id="<?= strtolower($type) ?>-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#<?= strtolower($type) ?>"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="<?= strtolower($type) ?>"
                                     aria-selected="<?= $isActive ? 'true' : 'false' ?>">
                                 <?= ucfirst($type) ?>
                             </button>
@@ -2035,11 +2035,11 @@ Launch demo modal
                         <?php $isActive = false; ?>
                     <?php endforeach; ?>
                 </ul>
-        
-    
+
+
             </div>
         </section>
-        
+
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active mb-5" id="sedan" role="tabpanel" aria-labelledby="sedan-tab">
                 <div class="container mt-3">
@@ -2051,9 +2051,9 @@ Launch demo modal
                                         <?= htmlspecialchars($product->discount_text) ?>
                                     </div>
                                     <div class="card-img-top" style="background-color:#DEEBEA">
-                                        <?php 
-                                            $image = $product->get_thumbnail; 
-                                            if ($image): 
+                                        <?php
+                                            $image = $product->get_thumbnail;
+                                            if ($image):
                                         ?>
                                             <img src="<?= asset($image->path) ?>" alt="<?= htmlspecialchars($product->title) ?>" class="img-fluid">
                                         <?php endif; ?>
@@ -2061,7 +2061,7 @@ Launch demo modal
                                     <div class="card-body">
                                         <h5 class="text-center"><?= htmlspecialchars($product->title) ?></h5>
                                         <ul class="list-fleet-specs">
-                                            
+
                                             <?php foreach ($product->productDetails as $detail): ?>
                                                 <li>
                                                     <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?= htmlspecialchars(ucwords(str_replace('_', ' ', htmlspecialchars($detail->key_title))) ) ?>" class="icon">
@@ -2075,12 +2075,12 @@ Launch demo modal
                                         <div class="row">
                                             <div class="col-md">
                                                 <span class="text-muted fw-bold d-block">From</span>
-                                                <span class="text-muted fw-bold">RM 
+                                                <span class="text-muted fw-bold">RM
                                                     <h4 class="d-inline-block">
                                                         <del><?= htmlspecialchars(number_format($product->price, 2)) ?></del>
                                                     </h4>
                                                 </span><br>
-                                                <span class="text-danger fw-bold">RM 
+                                                <span class="text-danger fw-bold">RM
                                                     <h4 class="d-inline-block"><?= htmlspecialchars(number_format($product->selling_price, 2)) ?></h4>
                                                 </span>
                                             </div>
@@ -2089,7 +2089,7 @@ Launch demo modal
                                                     <?= htmlspecialchars($product->stock) ?> unit left!
                                                 </div>
                                                 <div class="row">
-                                                    <a href="/booking.php?product_id=<?= htmlspecialchars($product->id) ?>" 
+                                                    <a href="/booking.php?product_id=<?= htmlspecialchars($product->id) ?>"
                                                        class="btn btn-primary">
                                                         Book Now
                                                     </a>
@@ -2104,200 +2104,66 @@ Launch demo modal
                 </div>
             </div>
         </div>
-        
 
-        <section class="mt-5 bg-light py-4">
-            <h2 class="text-center text-primary mt-3">Our Reviews</h2>
-            <div class="slider-review">
-
-                <div class="m-3">
-                    <div class="card rounded-3 shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <img src="uploads/fleet_images/8f4ddcda-31b5-453c-bb72-94f57463710a_755-1722425545.png"
-                                        class="img-fluid w-100"
-                                        alt="MRR HOLIDAYS Car Rental in Langkawi Nissan Serena S-Hybrid 2.0 (A)">
-                                    <div class="text-center mt-3">
-                                        <div class="stars"><i class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 position-relative">
-                                    <div class="mb-7">
-                                        <div class="review-body-3748 content-collapse" id="review-3748">
-                                            " First time user and I must say this car rental service is impressive.
-                                            Hassle free booking online with a clear and easy to understand website,
-                                            along with clear car pickup and drop off instructions. The price may be
-                                            slightly more expensive but we got an almost brand new Nissan Serena
-                                            S-hybrid 2.0. Mr Muhammad Ayadi helped us with the delivery, inspection
-                                            and briefing of the rental company procedures. Excellent service from
-                                            their heroes. Would highly recommend their car rental service for anyone
-                                            looking to get a rental car with no fuss.
-
-                                            "
-                                        </div>
-                                        <button class="btn btn-sm btn-light btn-toggle-collapse mt-3" data-id="3748"
-                                            data-value="First time user and I must say this car rental service is impressive. Hassle free booking online with a clear and easy to understand website, along with clear car pickup and drop off instructions. The price may be slightly more expensive but we got an almost brand new Nissan Serena S-hybrid 2.0. Mr Muhammad Ayadi helped us with the delivery, inspection and briefing of the rental company procedures. Excellent service from their heroes. Would highly recommend their car rental service for anyone looking to get a rental car with no fuss.
-
-" id="buttonRead-3748">Show more</button>
-                                    </div>
-                                    <div class="fst-italic text-muted position-absolute bottom-0 end-0 p-3">
-                                        By Levind Kumar <span class="flag-icon flag-icon-my"></span><br>
-                                        <span class="small text-dark">1 hour ago</span>
-                                    </div>
+<section class="mt-5 bg-light py-4">
+    <h2 class="text-center text-primary mt-3">Our Reviews</h2>
+    <div class="slider-review">
+        @foreach($reviews as $review)
+        <div class="m-3">
+            <div class="card rounded-3 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!-- Product Image -->
+                            <img src="{{ asset( $review->image_path) }}"
+                                 class="img-fluid w-100"
+                                 alt="{{ $review->product->title }}"
+                                 loading="lazy">
+                            <div class="text-center mt-3">
+                                <div class="stars">
+                                    <!-- Display Star Rating -->
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i class="fas fa-star fa-1x {{ $i <= $review->star ? 'text-primary' : 'text-muted' }}"></i>
+                                    @endfor
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer text-center">
-                            Nissan Serena S-Hybrid 2.0 (A) </div>
-                    </div>
-                </div>
-                <div class="m-3">
-                    <div class="card rounded-3 shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <img src="uploads/fleet_images/Alphard-2018-Image-672x480-template-2022_755-1667707760.png"
-                                        class="img-fluid w-100"
-                                        alt="MRR HOLIDAYS Car Rental in Langkawi Perodua Bezza 1.3 (A)">
-                                    <div class="text-center mt-3">
-                                        <div class="stars"><i class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 position-relative">
-                                    <div class="mb-7">
-                                        " Syahrul was very polite and kind and helpful, also in time the pick up and
-                                        drop off were very smooth and fast. Thanks "
-                                    </div>
-                                    <div class="fst-italic text-muted position-absolute bottom-0 end-0 p-3">
-                                        By AHMED SABAH MALIK ALDABBAGH <span
-                                            class="flag-icon flag-icon-iq"></span><br>
-                                        <span class="small text-dark">4 hours ago</span>
-                                    </div>
-                                </div>
+                        <div class="col-md-7 position-relative">
+                            <div class="mb-7">
+                                <!-- Review Text -->
+                                <p class="" id="review-{{ $review->id }}">
+                                    {{ Str::limit($review->review, 100) }}
+                                </p>
+                                @if(strlen($review->review) > 100)
+                                <button class="btn btn-sm btn-light btn-toggle-collapse mt-3"
+                                        data-id="{{ $review->id }}"
+                                        data-value="{{ $review->review }}">
+                                    Show more
+                                </button>
+                                @endif
+                            </div>
+                            <!-- Reviewer Information -->
+                            <div class="fst-italic text-muted position-absolute bottom-0 end-0 p-3">
+                                By {{ $review->user->name }}
+                                @if (!empty($review->user->country_code))
+                                <span class="flag-icon flag-icon-{{ strtolower($review->user->country_code) }}"></span>
+                                @endif
+                                <br>
+                                <span class="small text-dark">{{ $review->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
-                        <div class="card-footer text-center">
-                            Perodua Bezza 1.3 (A) </div>
                     </div>
                 </div>
-                <div class="m-3">
-                    <div class="card rounded-3 shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <img src="uploads/fleet_images/Alza-2022-Image-672x480-template_755-1667707983.png"
-                                        class="img-fluid w-100"
-                                        alt="MRR HOLIDAYS Car Rental in Langkawi Toyota Vellfire Dual VVT-I 2.5 (A)">
-                                    <div class="text-center mt-3">
-                                        <div class="stars"><i class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 position-relative">
-                                    <div class="mb-7">
-                                        " Good Serve, quick thanks
-                                        "
-                                    </div>
-                                    <div class="fst-italic text-muted position-absolute bottom-0 end-0 p-3">
-                                        By Hendrik tasek <span class="flag-icon flag-icon-id"></span><br>
-                                        <span class="small text-dark">4 hours ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            Toyota Vellfire Dual VVT-I 2.5 (A) </div>
-                    </div>
+                <!-- Product Name -->
+                <div class="card-footer text-center">
+                    {{ $review->product->title }}
                 </div>
-                <div class="m-3">
-                    <div class="card rounded-3 shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <img src="uploads/fleet_images/Axia_2023_Glittering_Silver_Axia_760-1687486337.png"
-                                        class="img-fluid w-100"
-                                        alt="MRR HOLIDAYS Car Rental in Langkawi Perodua Bezza 1.3 (A)">
-                                    <div class="text-center mt-3">
-                                        <div class="stars"><i class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 position-relative">
-                                    <div class="mb-7">
-                                        <div class="review-body-3745 content-collapse" id="review-3745">
-                                            " we were travelling from India and struggling to find a car for rental
-                                            at a very short notice. Thanks to the seamless experience at MRR
-                                            HOLIDAYS, i was able to get a good car at a very reasonable rate and
-                                            within 30 minutes at the ferry terminal location. The drop was at the
-                                            airport and the handover process was extremely smooth. I will highly
-                                            recommend booking car rentals here
-                                            "
-                                        </div>
-                                        <button class="btn btn-sm btn-light btn-toggle-collapse mt-3" data-id="3745"
-                                            data-value="we were travelling from India and struggling to find a car for rental at a very short notice. Thanks to the seamless experience at MRR HOLIDAYS, i was able to get a good car at a very reasonable rate and within 30 minutes at the ferry terminal location. The drop was at the airport and the handover process was extremely smooth. I will highly recommend booking car rentals here
-" id="buttonRead-3745">Show more</button>
-                                    </div>
-                                    <div class="fst-italic text-muted position-absolute bottom-0 end-0 p-3">
-                                        By Arvind Kumar Baranwal <span class="flag-icon flag-icon-in"></span><br>
-                                        <span class="small text-dark">4 hours ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            Perodua Bezza 1.3 (A) </div>
-                    </div>
-                </div>
-                <div class="m-3">
-                    <div class="card rounded-3 shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <img src="uploads/fleet_images/Aruz-Image-672x480-template_755-1667707520 (2).png"
-                                        class="img-fluid w-100"
-                                        alt="MRR HOLIDAYS Car Rental in Langkawi Toyota Vios New Variant 1.5 (A)">
-                                    <div class="text-center mt-3">
-                                        <div class="stars"><i class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i><i
-                                                class="fas fa-star fa-1x text-primary"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 position-relative">
-                                    <div class="mb-7">
-                                        " The best experience I have ever had with a car rental company.
-                                        "
-                                    </div>
-                                    <div class="fst-italic text-muted position-absolute bottom-0 end-0 p-3">
-                                        By Mikolaj Dylag <span class="flag-icon flag-icon-pl"></span><br>
-                                        <span class="small text-dark">1 day ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            Toyota Vios New Variant 1.5 (A) </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
 
-
-        </section>
 
        <section class="my-5">
             <div class="container">
