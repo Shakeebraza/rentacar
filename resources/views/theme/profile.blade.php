@@ -42,7 +42,7 @@
                         <a href="{{ route('updateprofile') }}" class="btn btn-primary">
                             <i class="fas fa-pencil-alt"></i> Update Profile
                         </a>
-                        <a href="/customer/users/edit-bank" class="btn btn-primary">
+                        <a href="{{ route('userbankaccount') }}" class="btn btn-primary">
                             <i class="fas fa-university"></i> Update Bank Details
                         </a>
                     </div>

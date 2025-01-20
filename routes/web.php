@@ -69,6 +69,8 @@ Route::middleware(['webLoginChk'])->group(function () {
   Route::post('/customer/users/changepassword', [App\Http\Controllers\CustomerController::class, 'changePassword'])->name('customer.changePassword');
   Route::get('/customer/users/updateprofile', [App\Http\Controllers\CustomerController::class, 'updateprofile'])->name('updateprofile');
   Route::post('/customer/users/updateprofile', [App\Http\Controllers\CustomerController::class, 'updateprofilepost'])->name('profile.update');
+  Route::get('/customer/users/userbankaccount', [App\Http\Controllers\CustomerController::class, 'userbankaccount'])->name('userbankaccount');
+  Route::post('/customer/users/updatebankdetails', [App\Http\Controllers\CustomerController::class, 'updateBankDetails'])->name('updateBankDetails');
 
   Route::get('/carts', [App\Http\Controllers\CustomerController::class, 'carts'])->name('customer.carts');
     Route::get('/history', [App\Http\Controllers\CustomerController::class, 'history'])->name('customer.history');

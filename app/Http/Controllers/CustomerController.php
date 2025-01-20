@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\AccountDetail;
+;
 use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
@@ -17,7 +19,42 @@ class CustomerController extends Controller
     }
     public function chnagepassword()
     {
-        return view('theme.chnagepassword', compact('user'));
+        return view('theme.chnagepassword');
+    }
+    public function userbankaccount()
+    {
+        $user = Auth::user();
+    $accountDetail = AccountDetail::where('user_id', $user->id)->first();
+        return view('theme.userbankaccount', compact('accountDetail'));
+    }
+    public function updateBankDetails(Request $request)
+    {
+        // Validate the input
+        $request->validate([
+            'account_number' => 'required|string|max:20',
+            'account_holder_name' => 'required|string|max:255',
+            'bank_name' => 'required|string|max:255',
+            'nric_number' => 'required|string|max:20',
+        ]);
+
+        // Get the authenticated user's ID
+        $userId = auth()->id();
+
+        // Find or create an account detail for the user
+        $accountDetail = AccountDetail::firstOrNew(['user_id' => $userId]);
+
+        // Update account details
+        $accountDetail->account_number = $request->input('account_number');
+        $accountDetail->account_holder_name = $request->input('account_holder_name');
+        $accountDetail->bank_name = $request->input('bank_name');
+        $accountDetail->ic_ssm_number = $request->input('nric_number');
+        $accountDetail->user_id = $userId; // Ensure the user ID is set
+
+        // Save the account details
+        $accountDetail->save();
+
+        // Redirect back with success message
+        return redirect()->route('customer.profile')->with('success', 'Bank details updated successfully!');
     }
     public function updateprofile()
     {
