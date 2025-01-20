@@ -44,6 +44,7 @@
 
 <?php
 ?>
+
 <main class="main">
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -61,8 +62,9 @@
                     <div class="col-md-auto text-center">
                         <!-- Profile Image -->
                         <img id="profileImagePreview"
-                            src="{{ $user->profile_image ? asset( $user->profile_image) : asset('theme/asset/img/profileImg.png') }}"
-                            class="img-fluid profile-image-preview border">
+                        src="{{ $user->profile_image ? asset( $user->profile_image) : asset('theme/asset/img/profileImg.png') }}"
+                        class="img-fluid profile-image-preview border">
+
                     </div>
                     <div class="col-md mt-4 mt-md-0">
                         <div class="card">
@@ -74,7 +76,7 @@
                             <div class="card-body">
                                 <form enctype="multipart/form-data" method="POST" action="{{ route('profile.update') }}">
                                     @csrf
-                                    @method('PUT')
+
 
                                     <div class="row mb-3">
                                         <label for="profile_image" class="col-md-2 col-form-label">Profile Image</label>
@@ -93,7 +95,7 @@
                                     <div class="row mb-3">
                                         <label for="phone-number" class="col-md-2 col-form-label">Phone Number</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="text" name="phone_number" required id="phone-number" value="{{ old('phone_number', $user->phone_number) }}">
+                                            <input class="form-control" type="number" name="phone_number" required id="phone-number" value="{{ old('phone_number', $user->phone_number) }}">
                                         </div>
                                     </div>
 
@@ -108,18 +110,18 @@
                                         <label for="country" class="col-md-2 col-form-label">Country</label>
                                         <div class="col-md-10">
                                             <select class="form-select" name="country" id="country" required>
-                                                <option value="">Select Country</option>
-                                                <option value="MY" {{ old('country') == 'MY' ? 'selected' : '' }}>Malaysia</option>
-                                                <option value="SG" {{ old('country') == 'SG' ? 'selected' : '' }}>Singapore</option>
-                                                <option value="GB" {{ old('country') == 'GB' ? 'selected' : '' }}>United Kingdom</option>
-                                                <option value="US" {{ old('country') == 'US' ? 'selected' : '' }}>United States</option>
+
+                                                <option value="MY" {{ old('country', $user->country) == 'MY' ? 'selected' : '' }}>Malaysia</option>
+                                                <option value="SG" {{ old('country', $user->country) == 'SG' ? 'selected' : '' }}>Singapore</option>
+                                                <option value="GB" {{ old('country', $user->country) == 'GB' ? 'selected' : '' }}>United Kingdom</option>
+                                                <option value="US" {{ old('country', $user->country) == 'US' ? 'selected' : '' }}>United States</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="dob" class="col-md-2 col-form-label">Date of Birth</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="date" name="dob" required id="dob" value="{{ old('dob', $user->dob) }}">
+                                            <input class="form-control" type="date" name="dob" required id="dob" value="{{ old('dob', \Carbon\Carbon::parse($user->date_of_birth)->format('Y-m-d')) }}">
                                         </div>
                                     </div>
 
