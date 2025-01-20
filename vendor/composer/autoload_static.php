@@ -37,6 +37,7 @@ class ComposerStaticInit22ccc522ec6b815918c7fd4b249b5c68
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         'c71260c1cf084f756474d36b60f4fe08' => __DIR__ . '/../..' . '/app/Helpers/MenuHelper.php',
+        '33c5517e3eb159ab5a0bfd876d5b8e64' => __DIR__ . '/../..' . '/app/Helpers/GlobalHelper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -566,6 +567,7 @@ class ComposerStaticInit22ccc522ec6b815918c7fd4b249b5c68
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Helpers\\MenuHelper' => __DIR__ . '/../..' . '/app/Helpers/MenuHelper.php',
         'App\\Http\\Controllers\\Admin\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AuthController.php',
         'App\\Http\\Controllers\\Admin\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoryController.php',
         'App\\Http\\Controllers\\Admin\\CollectionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CollectionController.php',
@@ -586,6 +588,7 @@ class ComposerStaticInit22ccc522ec6b815918c7fd4b249b5c68
         'App\\Http\\Controllers\\CheckoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/CheckoutController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ReviewController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReviewController.php',
         'App\\Http\\Controllers\\WebAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAuthController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

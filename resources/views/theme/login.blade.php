@@ -5,78 +5,78 @@
 @endphp
 
 @section('metatags')
-    <title>{{$global_d['site_title']}}</title>
+<title>{{$global_d['site_title']}}</title>
 @endsection
 
 @section('css')
 
 <style>
-   .row {
+    .row {
 
-    justify-content: center;
-}
+        justify-content: center;
+    }
+
 </style>
 
 @endsection
 @section('content')
-
-<div id="page-content">
-                <!-- Page Title -->
-                <div class="page section-header text-center mb-0">
-                    <div class="page-title">
-                        <div class="wrapper"><h1 class="page-width">Login</h1></div>
-                    </div>
+<div class="my-4 my-md-5">
+    <div class="container">
+        <div class="card card-auth shadow">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center">
+                    <img src="{{ asset(getset('logo')) }}" class="logo mb-4 mx-5 mx-md-0" alt="">
+                    <h4 class="mb-4">Sign in</h4>
                 </div>
-                <!-- End Page Title -->
-                <!-- Breadcrumbs -->
-                <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
-                    <div class="container breadcrumbs">
-                        <a href="{{route('home')}}" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span class="title-bold">Login</span>
+                <div class="mb-4"></div>
+                <form method="post" accept-charset="utf-8" action="{{ route('webpostlogin') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input class="form-control @error('email') is-invalid @enderror"
+                               type="email"
+                               name="email"
+                               placeholder="traveller@mail.com"
+                               id="email"
+                               value="{{ old('email') }}" />
+                        @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                </div>
-                <!-- End Breadcrumbs -->
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 box">
-                            <div class="mb-4">
-                                <form method="post" action="/weblogin" id="CustomerRegisterForm" accept-charset="UTF-8" class="customer-form">	
-                                @csrf
-                                    <h3>Registered Customers</h3>
-                                    <p>If you have an account with us, please log in.</p>
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="form-group">
-                                                <label for="CustomerEmail">Email <span class="required">*</span></label>
-                                                <input type="email" name="email" placeholder="" value="{{ old('email') }}" id="CustomerEmail" autofocus="">
-                                                @error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="form-group">
-                                                <label for="CustomerPassword">Password <span class="required">*</span></label>
-                                                <input type="password" value="" name="password" placeholder="" id="CustomerPassword" class="">                        	
-                                                @error('password')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
-                                            <input type="submit" class="btn mb-3" value="Sign In">
-                                            <p class="mb-4">
-                                                <a href="{{route('forgotpassword')}}">Forgot your password?</a> &nbsp; | &nbsp;
-                                                <a href="{{ route('register') }}" id="customer_register_link">Create account</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input class="form-control @error('password') is-invalid @enderror"
+                               type="password"
+                               name="password"
+                               placeholder="* * * * *"
+                               id="password" />
+                        @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-control" type="hidden" name="remember_me" value="0" />
+                            <input class="form-check-input" type="checkbox" name="remember_me" value="1" id="remember-me" />
+                            <label for="remember-me" class="form-check-label">Remember me</label>
                         </div>
                     </div>
-                </div>
+
+                    <input type="submit" class="btn btn-primary btn-block" value="Login">
+                </form>
+
+                <hr class="my-4">
+                <a href="{{ route('forgotpassword') }}" class="link-dark">Forgot password?</a>
+                <a href="{{ route('register') }}" class="link-dark register d-block">Not a member? Sign up here</a>
+                <a href="{{ route('home') }}" class="link-dark d-block mt-4">
+                    <i class="fa fa-arrow-left"></i> Back to home
+                </a>
             </div>
+        </div>
+    </div>
+</div>
+
+</main>
 @endsection

@@ -29,10 +29,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       
+
         //
         // View::composer('*', function ($view) {
-          
+
              $groups = [];
              $global_d = [];
              foreach (Setting::with('image')->get() as $key => $value) {
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
                 }
                 array_push($groups,$value->grouping);
              }
-             $global_d['grouping'] = implode(',',array_unique($groups)); 
+             $global_d['grouping'] = implode(',',array_unique($groups));
              $global_d['menus'] = Menu::with('children.children.children')->get();
              $global_d['order_status'] = [
                 'pending',
@@ -52,12 +52,13 @@ class AppServiceProvider extends ServiceProvider
                 'completed'
              ];
 
-        
+
             //  $view->with('global_d', $global_d);
-           
+
         // });
 
         View::share('global_d',$global_d);
 
     }
+
 }

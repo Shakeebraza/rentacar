@@ -22,8 +22,6 @@ class MenuHelper
             ->orderBy('created_at', 'asc')
             ->get();
     }
-    public static function getSetting($key)
-    {
-        return Setting::where('field', $key)->get();
-    }
+
+
 }

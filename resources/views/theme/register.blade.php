@@ -17,84 +17,158 @@
 @endsection
 @section('content')
 
-<div id="page-content">
-                <!-- Page Title -->
-                <div class="page section-header text-center mb-0">
-                    <div class="page-title">
-                        <div class="wrapper"><h1 class="page-width">Register</h1></div>
-                    </div>
-                </div>
-                <!-- End Page Title -->
-                <!-- Breadcrumbs -->
-                <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
-                    <div class="container breadcrumbs">
-                        <a href="{{'home'}}" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span class="title-bold">Register</span>
-                    </div>
-                </div>
-                <!-- End Breadcrumbs -->
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 box">	
-                            <div class="mb-4">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                                <h3>Personal Information</h3>
-                                <form method="post" action="/createaccount" accept-charset="UTF-8" class="customer-form">
-                                @csrf    
-                                <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-10">
-                                            <div class="form-group">
-                                                <label for="CustomerFirstName">Full Name <span class="required">*</span></label>
-                                                <input id="CustomerFirstName" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="form-group">
-                                                <label for="CustomerEmail">Email Address <span class="required">*</span></label>
-                                                <input id="CustomerEmail" type="email" name="email" placeholder="">                        	
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h3 class="mt-3">Login Information</h3>
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">                                	
-                                            <div class="form-group">
-                                                <label for="CustomerPassword">Password <span class="required">*</span></label>
-                                                <input id="CustomerPassword" type="password" name="Password" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="form-group">
-                                                <label for="CustomerConfirmPassword">Confirm Password <span class="required">*</span></label>
-                                                <input id="CustomerConfirmPassword" type="Password" name="password_confirmation" placeholder="">                        	
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="text-left col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <input type="submit" class="btn mb-3" value="Submit">
-                                        </div>
-                                        <div class="text-right col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <a href="{{ route('weblogin') }}"><i class="icon an an-angle-double-left me-1"></i>Back To Login</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+<div class="my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <img src="{{ asset(getset('logo')) }}" class="logo mb-4" style="height:4rem" alt="Logo">
+                            <h4 class="mb-4">Register</h4>
                         </div>
+                        <form method="POST" action="{{ route('createAccount') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="name">Name</label>
+                                    <input class="form-control @error('name') is-invalid @enderror"
+                                           type="text"
+                                           name="name"
+                                           placeholder="eg. John"
+                                           id="name"
+                                           value="{{ old('name') }}"
+                                           required>
+                                    @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="email">Email</label>
+                                        <input class="form-control @error('email') is-invalid @enderror"
+                                               type="email"
+                                               name="email"
+                                               placeholder="eg. John@gmail.com"
+                                               id="email"
+                                               value="{{ old('email') }}"
+                                               required>
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="phone_number">Phone Number</label>
+                                        <input class="form-control @error('phone_number') is-invalid @enderror"
+                                               type="tel"
+                                               name="phone_number"
+                                               placeholder="0123456789"
+                                               id="phone_number"
+                                               pattern="[0-9- ]{1,}"
+                                               title="Only numbers are allowed"
+                                               value="{{ old('phone_number') }}"
+                                               required>
+                                        @error('phone_number')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-select @error('gender') is-invalid @enderror"
+                                                name="gender"
+                                                id="gender"
+                                                required>
+                                            <option value="M" {{ old('gender') == 'M' ? 'selected' : '' }}>Male</option>
+                                            <option value="F" {{ old('gender') == 'F' ? 'selected' : '' }}>Female</option>
+                                        </select>
+                                        @error('gender')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="date_of_birth">Date of Birth</label>
+                                        <input class="form-control @error('date_of_birth') is-invalid @enderror"
+                                               type="date"
+                                               name="date_of_birth"
+                                               id="date_of_birth"
+                                               value="{{ old('date_of_birth') }}">
+                                        @error('date_of_birth')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="country">Country</label>
+                                        <select class="form-select @error('country') is-invalid @enderror"
+                                                name="country"
+                                                id="country">
+                                            <option value="MY" {{ old('country') == 'MY' ? 'selected' : '' }}>Malaysia</option>
+                                            <option value="SG" {{ old('country') == 'SG' ? 'selected' : '' }}>Singapore</option>
+                                            <option value="GB" {{ old('country') == 'GB' ? 'selected' : '' }}>United Kingdom</option>
+                                            <option value="US" {{ old('country') == 'US' ? 'selected' : '' }}>United States</option>
+                                            <!-- Add other countries as needed -->
+                                        </select>
+                                        @error('country')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="password">Password</label>
+                                    <input class="form-control @error('password') is-invalid @enderror"
+                                           type="password"
+                                           name="password"
+                                           id="password"
+                                           required>
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="confirm-password">Confirm Password</label>
+                                    <input class="form-control"
+                                           type="password"
+                                           name="password_confirmation"
+                                           id="confirm-password"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="g-recaptcha" data-sitekey="6LfcExcqAAAAAKavm4Fr_QLS7wrwV5kB1ScVkEHz"></div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <input type="submit" class="btn btn-primary btn-block" id="btn-submit" value="Sign Up">
+                                </div>
+                            </div>
+                        </form>
+                        <hr class="my-4">
+                        <a href="{{ route('weblogin') }}" class="name">Already a member? Sign in here</a><br>
+                        <a href="{{ route('home') }}"><i class="fa fa-arrow-left"></i> Back to home</a>
                     </div>
                 </div>
-
             </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('js')

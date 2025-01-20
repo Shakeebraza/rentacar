@@ -5,20 +5,7 @@ $enabledCategories = Category::where('is_enable', 1)->get();
 $companyMenuItems = MenuHelper::getMenuItems(1);
 $legalMenuItems = MenuHelper::getMenuItems(2);
 $attractions= MenuHelper::getsubAttractions(45);
-function getset($key) {
-    $jsonData = MenuHelper::getSetting($key);
-    $dataArray = json_decode($jsonData, true);
 
-    if (is_array($dataArray) && !empty($dataArray)) {
-        foreach ($dataArray as $data) {
-            if (isset($data['field']) && $data['field'] === $key) {
-                return $data['value'];
-            }
-        }
-    }
-
-    return null;
-}
 
 
 
@@ -76,7 +63,7 @@ function getset($key) {
 
     <nav class="navbar navbar-main navbar-expand-md navbar-light fixed-top">
         <div class="container-fluid d-flex justify-content-between px-0 px-md-2">
-            <a href="index.html"><img src="img/logo/logo.png" class="logo" alt=""></a>
+            <a href="{{ route('home') }}"><img src="{{ asset(getset('logo')) }}" class="logo" alt=""></a>
             <div class="ms-auto">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
                     aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,13 +123,27 @@ function getset($key) {
                             </li>
                         </ul>
                     </li>
+                    @if(Auth::check())  <!-- Check if the user is authenticated -->
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ Auth::user()->name }}</a>
+                        <ul class="dropdown-menu dropdown-menu-end text-center text-md-left">
+                            <li><a href="{{ route('customer.profile') }}" class="dropdown-item">My Profile</a></li>
+                            <li><a href="{{ route('customer.carts') }}" class="dropdown-item">My Cart</a></li>
+                            <li><a href="{{ route('customer.history') }}" class="dropdown-item">Booking List</a></li>
+                            <li><a href="{{ route('customer.referral') }}" class="dropdown-item">Refer & Earn</a></li>
+                            <li><a href="{{ route('customer.cases') }}" class="dropdown-item">Cases</a></li>
+
+                            <li><a href="{{ route('weblogout') }}" class="dropdown-item">Logout</a></li> <!-- Logout route -->
+                        </ul>
+                    </li>
+                @else
                     <li class="nav-item">
-                        <a href="login.html" class="nav-link px-md-4 py-md-0 mt-3 my-md-2">Login</a>
+                        <a href="{{ route('weblogin') }}" class="nav-link px-md-4 py-md-0 mt-3 my-md-2">Login</a>
                     </li>
                     <li class="nav-item" style="border:0">
-                        <a href="register.html"
-                            class="btn btn-outline-white mt-3 mt-md-0 ms-md-2 bg-primary text-white">Create Account</a>
+                        <a href="{{ route('register') }}" class="btn btn-outline-white mt-3 mt-md-0 ms-md-2 bg-primary text-white">Create Account</a>
                     </li>
+                @endif
                 </ul>
             </div>
         </div>
@@ -245,7 +246,7 @@ function getset($key) {
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-12 ">
                         <div class="ft-cpt-img d-flex align-items-center justify-content-center">
-                            <img src="img/logo/logo.png" class="img-fluid logo text-center" alt="">
+                            <img src="{{ asset(getset('logo')) }}" class="img-fluid logo text-center" alt="">
                         </div>
 
                         <div class="mt-2 text-muted text-center">

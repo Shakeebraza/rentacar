@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Password;
 
@@ -33,45 +33,54 @@ class WebAuthController extends Controller
     {
 
         if (Auth::check()){
-             return redirect('/dashboard'); 
+             return redirect('/dashboard');
         }
-       
+
         return view('theme.register');
     }
 
     public function createAccount(Request $request)
     {
-
+        // Extend Validator for case-insensitive password confirmation
         Validator::extend('case_insensitive_confirmation', function ($attribute, $value, $parameters, $validator) {
-                return strtolower($value) === strtolower($validator->getData()[$parameters[0]]);
+            return strtolower($value) === strtolower($validator->getData()[$parameters[0]]);
         });
+
+        // Validate all form fields
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email|max:255',
-            'Password' => 'required|string|min:8|max:255|case_insensitive_confirmation:password_confirmation',
+            'phone_number' => 'required|regex:/^[0-9- ]+$/|max:20',
+            'gender' => 'required|in:M,F',
+            'date_of_birth' => 'nullable|date|before:today',
+            'country' => 'required|size:2', // Assuming country code is 2 characters
+            'password' => 'required|string|min:8|max:255|case_insensitive_confirmation:password_confirmation',
         ]);
-    
+
         if ($validator->fails()) {
-            
             return back()
-            ->withErrors($validator)
-            ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
-        
-        // dd($request->Password);
-        
+
+        // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->Password),
+            'phone_number' => $request->phone_number,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'country' => $request->country,
+            'password' => Hash::make($request->password),
             'role_id' => 1, // Assuming 'customer' role has id 1
-            'created_by' => 0, 
+            'created_by' => 0,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        
+
         return redirect('/login')->with('success', 'Account created successfully. You can now login.');
     }
+
     public function webLogin(Request $request)
     {
         if (Auth::check()) {
@@ -82,19 +91,19 @@ class WebAuthController extends Controller
                 return redirect('/dashboard');
             }
         }
-        
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:255',
             'password' => 'required|string|min:8|max:255',
         ]);
-        
+
         if ($validator->fails()) {
             return back()
             ->withErrors($validator)
             ->withInput();
         }
-        
-        
+
+
         $user = User::where('email',$request->email)->first();
         // dd($user);
         if($user == null ){
@@ -110,16 +119,16 @@ class WebAuthController extends Controller
                 ])->withInput();
         }
             if(Hash::check($request->password, $user->password)) {
-               
-            
+
+
             if (Auth::attempt([
                 'email' =>$request->email,
                 'password' => $request->password])){
                     if($user->role_id == 1){
-                        return redirect('/dashboard'); 
-                        
+                        return redirect('/');
+
                     }else{
-                        return redirect('/admin/dashboard'); 
+                        return redirect('/admin/dashboard');
 
                     }
             }
@@ -144,13 +153,13 @@ class WebAuthController extends Controller
     {
         return view('theme.dashboard');
     }
-    
+
     public function weblogout()
     {
         Auth::logout();
         return redirect('/login');
     }
-  
+
  /**
      * Send a reset link to the given user.
      *
@@ -175,5 +184,5 @@ class WebAuthController extends Controller
             return back()->withErrors(['email' => __($status)]);
         }
     }
-  
+
 }

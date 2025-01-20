@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 
-function getProductTypesByCategory($categoryId)
+function getProductTypesByCategoryw($categoryId)
     {
         return DB::table('products')
             ->where('category_id', $categoryId)
@@ -2015,7 +2015,7 @@ Launch demo modal
             <div class="container">
                 <h2 class="text-center text-primary p-3">Our Vehicles</h2>
                 <?php
-                $ourTypes = getProductTypesByCategory(44); // Get product types for category 44
+                $ourTypes = getProductTypesByCategoryw(44); // Get product types for category 44
                 $isActive = true; // To set the first tab as active
                 ?>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">

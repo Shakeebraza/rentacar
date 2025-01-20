@@ -16,7 +16,7 @@ use App\Models\User;
 Route::get('/',function(){
 
     return redirect('/admin/login');
-});
+})->name('home');
 
 
 //Blogs
@@ -56,14 +56,19 @@ Route::get('/test', [App\Http\Controllers\HomeController::class, 'test']);
 Route::get('/login', [App\Http\Controllers\WebAuthController::class, 'login'])->name('weblogin');
 Route::get('/register', [App\Http\Controllers\WebAuthController::class, 'register'])->name('register');
 Route::get('/forgotpassword', [App\Http\Controllers\WebAuthController::class, 'forgotPassword'])->name('forgotpassword');
-Route::post('/createaccount', [App\Http\Controllers\WebAuthController::class, 'createAccount']);
-Route::post('/weblogin', [App\Http\Controllers\WebAuthController::class, 'webLogin']);
+Route::post('/createaccount', [App\Http\Controllers\WebAuthController::class, 'createAccount'])->name('createAccount');
+Route::post('/weblogin', [App\Http\Controllers\WebAuthController::class, 'webLogin'])->name('webpostlogin');
 Route::post('/password-reset-request', [App\Http\Controllers\WebAuthController::class, 'sendResetLink'])->name('resetpassword');
 
 // dashboard login Group
 Route::middleware(['webLoginChk'])->group(function () {
   Route::get('/dashboard', [App\Http\Controllers\WebAuthController::class, 'dashboard'])->name('dashboard');
   Route::get('/logout', [App\Http\Controllers\WebAuthController::class, 'weblogout'])->name('weblogout');
+  Route::get('/profile', [App\Http\Controllers\CustomerController::class, 'profile'])->name('customer.profile');
+    Route::get('/carts', [App\Http\Controllers\CustomerController::class, 'carts'])->name('customer.carts');
+    Route::get('/history', [App\Http\Controllers\CustomerController::class, 'history'])->name('customer.history');
+    Route::get('/referral', [App\Http\Controllers\CustomerController::class, 'referral'])->name('customer.referral');
+    Route::get('/cases', [App\Http\Controllers\CustomerController::class, 'cases'])->name('customer.cases');
 });
 
 
