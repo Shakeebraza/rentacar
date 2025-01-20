@@ -65,7 +65,12 @@ Route::middleware(['webLoginChk'])->group(function () {
   Route::get('/dashboard', [App\Http\Controllers\WebAuthController::class, 'dashboard'])->name('dashboard');
   Route::get('/logout', [App\Http\Controllers\WebAuthController::class, 'weblogout'])->name('weblogout');
   Route::get('/profile', [App\Http\Controllers\CustomerController::class, 'profile'])->name('customer.profile');
-    Route::get('/carts', [App\Http\Controllers\CustomerController::class, 'carts'])->name('customer.carts');
+  Route::get('/customer/users/chnagepassword', [App\Http\Controllers\CustomerController::class, 'chnagepassword'])->name('chngpassword');
+  Route::post('/customer/users/changepassword', [App\Http\Controllers\CustomerController::class, 'changePassword'])->name('customer.changePassword');
+  Route::get('/customer/users/updateprofile', [App\Http\Controllers\CustomerController::class, 'updateprofile'])->name('updateprofile');
+  Route::post('/customer/users/updateprofile', [App\Http\Controllers\CustomerController::class, 'updateprofilepost'])->name('profile.update');
+
+  Route::get('/carts', [App\Http\Controllers\CustomerController::class, 'carts'])->name('customer.carts');
     Route::get('/history', [App\Http\Controllers\CustomerController::class, 'history'])->name('customer.history');
     Route::get('/referral', [App\Http\Controllers\CustomerController::class, 'referral'])->name('customer.referral');
     Route::get('/cases', [App\Http\Controllers\CustomerController::class, 'cases'])->name('customer.cases');

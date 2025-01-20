@@ -307,7 +307,7 @@ $attractions= MenuHelper::getsubAttractions(45);
         });
     </script>
 
-
+    @yield(section: 'js')
 
 </body>
 

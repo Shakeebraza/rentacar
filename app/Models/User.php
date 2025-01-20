@@ -22,8 +22,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'phone_number',
+        'gender',
+        'date_of_birth',
+        'country',
         'created_by',
-        'permissions'
+        'permissions',
     ];
 
     /**
@@ -43,5 +47,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'date_of_birth' => 'date', // Cast 'date_of_birth' as a date
     ];
 }

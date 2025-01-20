@@ -53,7 +53,7 @@ class WebAuthController extends Controller
             'phone_number' => 'required|regex:/^[0-9- ]+$/|max:20',
             'gender' => 'required|in:M,F',
             'date_of_birth' => 'nullable|date|before:today',
-            'country' => 'required|size:2', // Assuming country code is 2 characters
+            'country' => 'required',
             'password' => 'required|string|min:8|max:255|case_insensitive_confirmation:password_confirmation',
         ]);
 

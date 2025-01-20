@@ -3,36 +3,72 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 class CustomerController extends Controller
 {
     public function profile()
     {
-        // Logic for displaying the user profile
-        return view('customer.profile');  // Return a view for the profile page
+        $user = Auth::user();
+        return view('theme.profile', compact('user'));
+    }
+    public function chnagepassword()
+    {
+        return view('theme.chnagepassword', compact('user'));
+    }
+    public function updateprofile()
+    {
+        $user = Auth::user();
+        return view('theme.updateprofile', compact('user'));
+    }
+    public function changePassword(Request $request)
+    {
+
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+
+        if (!$user instanceof \App\Models\User) {
+            return back()->withErrors(['user' => 'User not found or invalid.']);
+        }
+
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('customer.profile')->with('success', 'Password changed successfully.');
     }
 
     public function carts()
     {
-        // Logic for displaying the user's cart
-        return view('customer.carts');  // Return a view for the carts page
+
+        return view('theme.carts');
     }
 
     public function history()
     {
-        // Logic for displaying the user's booking history
-        return view('customer.history');  // Return a view for the booking history page
+
+        return view('theme.history');
     }
 
     public function referral()
     {
-        // Logic for displaying the referral page
-        return view('customer.referral');  // Return a view for the referral page
+
+        return view('theme.referral');
     }
 
     public function cases()
     {
-        // Logic for displaying the cases page
-        return view('customer.cases');  // Return a view for the cases page
+
+        return view('theme.cases');
     }
 }
