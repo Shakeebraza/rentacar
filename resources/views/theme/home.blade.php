@@ -2015,8 +2015,8 @@ Launch demo modal
             <div class="container">
                 <h2 class="text-center text-primary p-3">Our Vehicles</h2>
                 <?php
-                $ourTypes = getProductTypesByCategoryw(44); // Get product types for category 44
-                $isActive = true; // To set the first tab as active
+                $ourTypes = getProductTypesByCategoryw(44); 
+                $isActive = true; 
                 ?>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <?php foreach ($ourTypes as $index => $type): ?>
@@ -2089,10 +2089,19 @@ Launch demo modal
                                                     <?= htmlspecialchars($product->stock) ?> unit left!
                                                 </div>
                                                 <div class="row">
-                                                    <a href="/booking.php?product_id=<?= htmlspecialchars($product->id) ?>"
+                                                    <?php
+                                                    // Current date and time
+                                                    $today = date('Y-m-d H:i:s');
+                                                    
+                                                    // Next day with the same time
+                                                    $nextDay = date('Y-m-d H:i:s', strtotime('+1 day'));
+                                                    ?>
+                                                    <a href="<?= route('booking', ['slug' => $product->slug, 'today' => $today, 'from' => $nextDay]) ?>"
                                                        class="btn btn-primary">
                                                         Book Now
                                                     </a>
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                         </div>

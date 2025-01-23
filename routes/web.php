@@ -22,6 +22,7 @@ Route::get('/',function(){
 //Blogs
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'category']);
+Route::get('/booking/{slug}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking');
 
 Route::get('/products/{id}', [App\Http\Controllers\HomeController::class, 'product']);
 
