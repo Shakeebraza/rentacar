@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\Part\HtmlPart;
 use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
 
@@ -254,12 +255,8 @@ class HomeController extends Controller
 
     }
     public function pageContent($slug){
-        $pageData = Page::where('slug', $slug)->first();
-        if(!$pageData){
-            return back()->with('error', 'Record Not Found');
-        }
-
-        return view('theme.page', compact('pageData'));
+        $page = Page::where('slug', $slug)->firstOrFail();
+        return view('theme.page', compact('page'));
     }
     public function test(){
         Mail::send('theme.emails.order-confirmation-email',[], function($message){

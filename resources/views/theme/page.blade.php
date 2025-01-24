@@ -2,7 +2,7 @@
 
 @php
   //dd($model)
-    
+
 @endphp
 
 @section('metatags')
@@ -12,7 +12,7 @@
 @endsection
 @section('css')
 <style>
-        
+
 
         p {
             font-size: 16px;
@@ -20,33 +20,21 @@
             text-align: justify;
         }
 
-        
+
 </style>
 @endsection
 @section('content')
 
-<?php 
-?>
-    <div id="page-content" class="template-collection">
-        <div class="page section-header text-center">
-            <div class="page-title">
-                <div class="wrapper">
-                    <h1 class="page-title">{{$pageData->title ?? ''}}</h1>
-                </div>
-            </div>
-        </div>
 
-        <div class="privacy-policy-content container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
-                {!! $pageData->longdetails ?? '' !!}
-                    <p>{{$pageData->shortdetails ?? ''}}</p>
 
-                   
-                </div>
-            </div>
-        </div>
+
+<main class="main">
+    <div class="container">
+        <h1 class="my-4">{{ $page->title }}</h1>
+        {!! $page->content !!}
+
     </div>
+</main>
 @endsection
 @section('js')
 

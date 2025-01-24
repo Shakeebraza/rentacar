@@ -26,68 +26,36 @@
       <div class="row ">
         <div class="col-md-4">
           <div class="card ">
-           
+
             <div class="card-img-top" style="background-color:#DEEBEA">
-                <img src="uploads/fleet_images/Alphard-2018-Image-672x480-template-2022_755-1667707760.png"
+                <img src="{{ asset($product->get_thumbnail->path)  }}"
                     class="img-fluid"
                     alt="MRR HOLIDAYS Car Rental in Langkawi Sedan Toyota Vios New Variant 1.5 (A)">
             </div>
             <div class="card-body">
-                <h5 class="text-center">Toyota Vios New Variant 1.5 (A) </h5>
+                <h5 class="text-center">{{ $product->get_title  }} </h5>
                 <ul class="list-fleet-specs">
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Passenger"
-                            class="icon">
-                            <img src="img/icon/icon-passengers.svg" class="img-fluid" alt="">
-                        </span>
-                        5
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Baggage"
-                            class="icon">
-                            <img src="img/icon/icon-baggage.svg" class="img-fluid" alt="">
-                        </span>
-                        3
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Door"
-                            class="icon">
-                            <img src="img/icon/icon-door.svg" class="img-fluid" alt=""> </span>
-                        5
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Aircond"
-                            class="icon">
-                            <img src="img/icon/icon-aircond.svg" class="img-fluid" alt="">
-                        </span>
-                        Yes
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Transmission" class="icon">
-                            <img src="img/icon/icon-transmission.svg" class="img-fluid" alt="">
-                        </span>
-                        A
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Oil"
-                            class="icon">
-                            <img src="img/icon/icon-oil.svg" class="img-fluid" alt=""> </span>
-                        Petrol
-                    </li>
+                    <?php foreach ($product->productDetails as $detail): ?>
+                                                <li>
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?= htmlspecialchars(ucwords(str_replace('_', ' ', htmlspecialchars($detail->key_title))) ) ?>" class="icon">
+                                                        <img src="{{ asset('theme/asset/img/icon/' . $detail->key_title . '.svg') }}" class="img-fluid" alt="">
+                                                    </span>
+                                                    <?= htmlspecialchars($detail->value) ?>
+                                                </li>
+                                            <?php endforeach; ?>
                 </ul>
                 <hr>
                 <div class="row">
                     <div class="col-md">
                         <span class="text-muted fw-bold d-block">From</span>
                         <span class="text-muted fw-bold">RM <h4 class="d-inline-block">
-                                <del>180.00</del></h4></span><br>
-                        <span class="text-danger fw-bold">RM <h4 class="d-inline-block">150.00
+                                <del>{{  $product->price }}</del></h4></span><br>
+                        <span class="text-danger fw-bold">RM <h4 class="d-inline-block">{{  $product->selling_price }}
                             </h4></span>
                     </div>
                     <div class="col-md-auto my-auto btnBooking_area">
                         <div class="fw-bold text-danger text-end">
-                            1 unit left! </div>
+                            <?= htmlspecialchars($product->stock) ?> unit left! </div>
                             <div class="row">
                                 @if($isBooked)
                                     <button class="btn btn-secondary" disabled>Already Booked</button>
@@ -645,7 +613,7 @@
                             </select>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
             <script>
@@ -656,7 +624,7 @@
                 <div class="row gx-1 gy-2 gy-md-0 input-group-2-col">
                     <div class="col-6 col-md pe-md-0">
                         <div class="form-floating input-group">
-                           
+
                             <input type="text" name="start_date"
                                 class="form-control pe-0" placeholder="29 Apr 2021"
                                 id="pickup_date">
@@ -665,7 +633,7 @@
                     </div>
                     <div class="col-6 col-md ps-md-0">
                         <div class="form-floating input-group">
-                          
+
                             <!-- <input type="text" name="start_time" class="form-control pe-0" placeholder="10:00 AM" value="10:00 AM" id="pickup_time"> -->
                             <select name="start_time" class="form-control pe-0"
                                 id="start-time">
@@ -744,7 +712,7 @@
                     </div>
                     <div class="col-6 col-md pe-md-0">
                         <div class="form-floating input-group">
-                           
+
                             <input type="text" name="end_date"
                                 class="form-control pe-0" placeholder="29 Apr 2021"
                                 id="return_date">
@@ -753,7 +721,7 @@
                     </div>
                     <div class="col-6 col-md ps-md-0">
                         <div class="form-floating input-group">
-                           
+
                             <!-- <input type="text" name="end_time" class="form-control pe-0" placeholder="10:00 AM" value="10:00 AM" id="return_time"> -->
                             <select name="end_time" class="form-control pe-0"
                                 id="end-time">
@@ -844,98 +812,80 @@
                 <label for="diff_loc">Return to another location</label>
             </div>
         </div>
-  
+
     </form>
       </div>
     </section>
     <div class="similar-product">
-      <div class="hd-smlr-pd">
-        <h3>Similar Listings</h3>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card ">
-            
-            <div class="card-img-top" style="background-color:#DEEBEA">
-                <img src="uploads/fleet_images/Alphard-2018-Image-672x480-template-2022_755-1667707760.png"
-                    class="img-fluid"
-                    alt="MRR HOLIDAYS Car Rental in Langkawi Sedan Toyota Vios New Variant 1.5 (A)">
-            </div>
-            <div class="card-body">
-                <h5 class="text-center">Toyota Vios New Variant 1.5 (A) </h5>
-                <ul class="list-fleet-specs">
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Passenger"
-                            class="icon">
-                            <img src="img/icon/icon-passengers.svg" class="img-fluid" alt="">
-                        </span>
-                        5
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Baggage"
-                            class="icon">
-                            <img src="img/icon/icon-baggage.svg" class="img-fluid" alt="">
-                        </span>
-                        3
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Door"
-                            class="icon">
-                            <img src="img/icon/icon-door.svg" class="img-fluid" alt=""> </span>
-                        5
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Aircond"
-                            class="icon">
-                            <img src="img/icon/icon-aircond.svg" class="img-fluid" alt="">
-                        </span>
-                        Yes
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Transmission" class="icon">
-                            <img src="img/icon/icon-transmission.svg" class="img-fluid" alt="">
-                        </span>
-                        A
-                    </li>
-                    <li>
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Oil"
-                            class="icon">
-                            <img src="img/icon/icon-oil.svg" class="img-fluid" alt=""> </span>
-                        Petrol
-                    </li>
-                </ul>
-                <hr>
-                <div class="row">
-                    <div class="col-md">
-                        <span class="text-muted fw-bold d-block">From</span>
-                        <span class="text-muted fw-bold">RM <h4 class="d-inline-block">
-                                <del>180.00</del></h4></span><br>
-                        <span class="text-danger fw-bold">RM <h4 class="d-inline-block">150.00
-                            </h4></span>
+        <div class="hd-smlr-pd">
+            <h3>Similar Listings</h3>
+        </div>
+        <div class="row">
+            @foreach ($similarProducts as $similarProduct)
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-img-top" style="background-color:#DEEBEA">
+                        <img src="{{ asset( $similarProduct->get_thumbnail->path) }}"
+                            class="img-fluid"
+                            alt="{{ $similarProduct->name }}">
                     </div>
-                    <div class="col-md-auto my-auto btnBooking_area">
-                        <div class="fw-bold text-danger text-end">
-                            1 unit left! </div>
+                    <div class="card-body">
+                        <h5 class="text-center">{{ $similarProduct->name }}</h5>
+                        <ul class="list-fleet-specs">
+                            <?php foreach ($similarProduct->productDetails as $detail): ?>
+                                                <li>
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?= htmlspecialchars(ucwords(str_replace('_', ' ', htmlspecialchars($detail->key_title))) ) ?>" class="icon">
+                                                        <img src="{{ asset('theme/asset/img/icon/' . $detail->key_title . '.svg') }}" class="img-fluid" alt="">
+                                                    </span>
+                                                    <?= htmlspecialchars($detail->value) ?>
+                                                </li>
+                                            <?php endforeach; ?>
+                        </ul>
+                        <hr>
                         <div class="row">
-                            <a href="/booking inner.html" class="btn btn-primary "
-                                >Book Now</a>
+                            <div class="col-md">
+                                <span class="text-muted fw-bold d-block">From</span>
+                                <span class="text-muted fw-bold">RM
+                                    <h4 class="d-inline-block">
+                                        <del>{{ number_format($similarProduct->price, 2) }}</del>
+                                    </h4>
+                                </span><br>
+                                <span class="text-danger fw-bold">RM
+                                    <h4 class="d-inline-block">{{ number_format($similarProduct->discounted_price, 2) }}</h4>
+                                </span>
+                            </div>
+                            <div class="col-md-auto my-auto btnBooking_area">
+                                <div class="fw-bold text-danger text-end">
+                                    {{ $similarProduct->stock > 0 ? $similarProduct->stock . ' units left!' : 'Out of stock' }}
+                                </div>
+                                <div class="row">
+                                    <?php
+                                                    $today = date('Y-m-d H:i:s');
+
+                                                    $nextDay = date('Y-m-d H:i:s', strtotime('+1 day'));
+                                                    ?>
+                                                    <a href="<?= route('booking', ['slug' => $product->slug, 'today' => $today, 'from' => $nextDay]) ?>"
+                                                       class="btn btn-primary">
+                                                        Book Now
+                                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        </div>
-      </div>
     </div>
+
   </div>
         </div>
       </div>
     </div>
-  
+
   </div>
 
   @endsection
   @section('js')
-  
+
   @endsection

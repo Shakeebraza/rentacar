@@ -22,6 +22,9 @@ Route::get('/',function(){
 //Blogs
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'category']);
+Route::get('/pages/{slug}', [App\Http\Controllers\HomeController::class, 'pageContent'])->name('pages.show');
+
+
 Route::get('/booking/{slug}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking');
 
 Route::get('/products/{id}', [App\Http\Controllers\HomeController::class, 'product']);
@@ -33,7 +36,7 @@ Route::get('/blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show']
 
 Route::get('/combination_maker', [App\Http\Controllers\HomeController::class, 'combination_maker']);
 Route::get('/blogs/categories/{id}', [App\Http\Controllers\HomeController::class, 'blog_categories']);
-Route::get('/pages/{slug}', [App\Http\Controllers\HomeController::class, 'pageContent']);
+
 
 //Carts
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'cart']);

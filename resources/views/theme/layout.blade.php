@@ -183,9 +183,20 @@ $attractions= MenuHelper::getsubAttractions(45);
                     <h6 class="mb-3 text-uppercase">Company</h6>
                     <ul class="list-unstyled">
                         @foreach ($companyMenuItems as $item)
+
                         <li>
-                            <a href="{{ $item->link }}">{{ $item->title }}</a>
+                            @if ($item->target == 1)
+
+                                <a href="{{ route('pages.show', ['slug' => $item->link]) }}">{{ $item->title }}</a>
+                            @elseif ($item->target == 2)
+
+                                <a href="{{ route($item->link) }}">{{ $item->title }}</a>
+                            @else
+
+                                <a href="{{ $item->link }}">{{ $item->title }}</a>
+                            @endif
                         </li>
+
                     @endforeach
 
 
@@ -208,7 +219,17 @@ $attractions= MenuHelper::getsubAttractions(45);
 
                         @foreach ($legalMenuItems as $item)
                         <li>
-                            <a href="{{ $item->link }}">{{ $item->title }}</a>
+                            {{--  <a href="{{ $item->link }}">{{ $item->title }}</a>  --}}
+                            @if ($item->target == 1)
+
+                                <a href="{{ route('pages.show', ['slug' => $item->link]) }}">{{ $item->title }}</a>
+                            @elseif ($item->target == 2)
+
+                                <a href="{{ route($item->link) }}">{{ $item->title }}</a>
+                            @else
+
+                                <a href="{{ $item->link }}">{{ $item->title }}</a>
+                            @endif
                         </li>
                     @endforeach
                         {{--  <li><a href="https://MRR HOLIDAYS.tawk.help/" target="_blank">Help Center</a></li>  --}}
