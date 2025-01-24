@@ -268,6 +268,24 @@ class HomeController extends Controller
         });
 
     }
+    public function reviews()
+    {
+        $reviews = ProductReview::join('users', 'product_reviews.user_id', '=', 'users.id')
+            ->join('products', 'product_reviews.product_id', '=', 'products.id')
+            ->join('filemanager', 'products.image', '=', 'filemanager.id')
+            ->select(
+                'product_reviews.*',
+                'users.name as user_name',
+                'users.email as user_email',
+                'products.title as product_name',
+                'filemanager.path as image_path'
+            )
+            ->where('product_reviews.active', 1)
+            ->paginate(20);
+
+        return view('theme.reviews', compact('reviews'));
+    }
+
 
 
 

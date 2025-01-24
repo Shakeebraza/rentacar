@@ -23,6 +23,7 @@ Route::get('/',function(){
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'category']);
 Route::get('/pages/{slug}', [App\Http\Controllers\HomeController::class, 'pageContent'])->name('pages.show');
+Route::get('/reviews', [App\Http\Controllers\HomeController::class, 'reviews'])->name('reviews.index');
 
 
 Route::get('/booking/{slug}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking');
