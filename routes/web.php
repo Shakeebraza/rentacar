@@ -27,6 +27,7 @@ Route::get('/reviews', [App\Http\Controllers\HomeController::class, 'reviews'])-
 
 
 Route::get('/booking/{slug}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking');
+Route::get('/customer/orders', [App\Http\Controllers\BookingController::class, 'index'])->name('customers.orders');
 
 Route::get('/products/{id}', [App\Http\Controllers\HomeController::class, 'product']);
 

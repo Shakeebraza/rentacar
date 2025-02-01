@@ -33,7 +33,10 @@ class BookingController extends Controller
     return view('theme.booking', compact('product', 'today', 'from', 'isBooked', 'similarProducts'));
 }
 
-
+public function index()
+{
+    return view('theme.order');
+}
 
 
 }

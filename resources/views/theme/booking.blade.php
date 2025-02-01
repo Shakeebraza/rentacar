@@ -60,7 +60,8 @@
                                 @if($isBooked)
                                     <button class="btn btn-secondary" disabled>Already Booked</button>
                                 @else
-                                    <a href="/booking-inner.html" class="btn btn-primary">Book Now</a>
+                                <a href="{{ route('customers.orders') }}" class="btn btn-primary">Book Now</a>
+
                                 @endif
                             </div>
                     </div>
